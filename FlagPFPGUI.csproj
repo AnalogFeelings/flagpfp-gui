@@ -56,19 +56,19 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BitmapProcessing.cs" />
-    <Compile Include="Exceptions.cs" />
+    <Compile Include="FlagPFPCore\BitmapProcessing.cs" />
+    <Compile Include="FlagPFPCore\Exceptions.cs" />
     <Compile Include="InputChecker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainClass.cs" />
+    <Compile Include="FlagPFPCore\MainClass.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PrideFlag.cs" />
+    <Compile Include="FlagPFPCore\PrideFlag.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutForm.resx">
