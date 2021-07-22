@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using FlagPFPCore.Exceptions;
 using FlagPFPCore.FlagMaking;
+using System;
 using System.IO;
-using FlagPFPCore.Exceptions;
+using System.Windows.Forms;
 
 namespace FlagPFPGUI
 {
@@ -24,17 +17,17 @@ namespace FlagPFPGUI
             {
                 FlagMaker.LoadFlagDefsFromDir("Flag JSONs");
             }
-            catch(DirectoryNotFoundException)
+            catch (DirectoryNotFoundException)
             {
                 MessageBox.Show("Flag JSON directory not found!", "Error!", MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
-                generateButton.Enabled = false;
+                Environment.Exit(0);
             }
             catch (NoFlagsFoundException)
             {
                 MessageBox.Show("No flags found in JSON directory!", "Error!", MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
-                generateButton.Enabled = false;
+                Environment.Exit(0);
             }
             flagCombo.DataSource = new BindingSource(FlagMaker.FlagDictionary, null);
             flagCombo.DisplayMember = "Key";
@@ -60,14 +53,14 @@ namespace FlagPFPGUI
                 FlagMaker.ExecuteProcessing(inputBox.Text, flagCombo.GetItemText(flagCombo.SelectedItem),
                     pixelMargin, innerSize, fullSize, outputBox.Text);
             }
-            catch(InvalidFlagException)
+            catch (InvalidFlagException)
             {
                 MessageBox.Show("How did you even pass an invalid flag? There's checks for it...", "Error!",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 EnableControls();
                 return;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error! Exception:\n" + ex.Message, "Error!",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -104,12 +97,12 @@ namespace FlagPFPGUI
 
         private void inputBrowseButton_Click(object sender, EventArgs e)
         {
-            using(OpenFileDialog openFileDialog = new OpenFileDialog())
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = "c:\\";
                 openFileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg, .jpeg)|*.jpg;.jpeg";
 
-                if(openFileDialog.ShowDialog() == DialogResult.OK)
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     inputBox.Text = openFileDialog.FileName;
                 }
@@ -128,6 +121,12 @@ namespace FlagPFPGUI
                     outputBox.Text = openFileDialog.FileName;
                 }
             }
+        }
+
+        private void aboutButton_Click(object sender, EventArgs e)
+        {
+            AboutForm aboutForm = new AboutForm();
+            aboutForm.Show();
         }
     }
 }

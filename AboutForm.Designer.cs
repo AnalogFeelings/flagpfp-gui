@@ -1,5 +1,5 @@
 ﻿
-namespace DLH
+namespace FlagPFPGUI
 {
     partial class AboutForm
     {

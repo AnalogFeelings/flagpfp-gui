@@ -29,6 +29,7 @@ namespace FlagPFPGUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.quitButton = new System.Windows.Forms.Button();
             this.generateButton = new System.Windows.Forms.Button();
@@ -48,12 +49,20 @@ namespace FlagPFPGUI
             this.inputBox = new System.Windows.Forms.TextBox();
             this.previewPicture = new System.Windows.Forms.PictureBox();
             this.aboutButton = new System.Windows.Forms.Button();
+            this.inputTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.flagTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.marginTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.insizeTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.fsizeTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.outputTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.aboutButton);
             this.groupBox2.Controls.Add(this.quitButton);
             this.groupBox2.Controls.Add(this.generateButton);
@@ -105,6 +114,7 @@ namespace FlagPFPGUI
             this.label6.Size = new System.Drawing.Size(39, 13);
             this.label6.TabIndex = 13;
             this.label6.Text = "Output";
+            this.outputTooltip.SetToolTip(this.label6, "The output file.");
             // 
             // outputBrowseButton
             // 
@@ -131,6 +141,7 @@ namespace FlagPFPGUI
             this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "Full Size";
+            this.fsizeTooltip.SetToolTip(this.label5, "The image size of the output.");
             // 
             // fsizeBox
             // 
@@ -147,6 +158,7 @@ namespace FlagPFPGUI
             this.label4.Size = new System.Drawing.Size(54, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Inner Size";
+            this.insizeTooltip.SetToolTip(this.label4, "Size of the inner image, for example, set it to more to crop it.");
             // 
             // insizeBox
             // 
@@ -163,6 +175,7 @@ namespace FlagPFPGUI
             this.label3.Size = new System.Drawing.Size(39, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Margin";
+            this.marginTooltip.SetToolTip(this.label3, "Pixel margin between border and inner window.\r\n");
             // 
             // marginBox
             // 
@@ -179,6 +192,7 @@ namespace FlagPFPGUI
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Flag";
+            this.flagTooltip.SetToolTip(this.label2, "Choose the pride flag from this combo box.");
             // 
             // flagCombo
             // 
@@ -206,6 +220,7 @@ namespace FlagPFPGUI
             this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Input";
+            this.inputTooltip.SetToolTip(this.label1, "The input image, in PNG or JPEG.");
             // 
             // inputBox
             // 
@@ -232,6 +247,47 @@ namespace FlagPFPGUI
             this.aboutButton.TabIndex = 16;
             this.aboutButton.Text = "About";
             this.aboutButton.UseVisualStyleBackColor = true;
+            this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
+            // 
+            // inputTooltip
+            // 
+            this.inputTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.inputTooltip.ToolTipTitle = "Input";
+            // 
+            // flagTooltip
+            // 
+            this.flagTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.flagTooltip.ToolTipTitle = "Flag";
+            // 
+            // marginTooltip
+            // 
+            this.marginTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.marginTooltip.ToolTipTitle = "Margin";
+            // 
+            // insizeTooltip
+            // 
+            this.insizeTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.insizeTooltip.ToolTipTitle = "Inner Size";
+            // 
+            // fsizeTooltip
+            // 
+            this.fsizeTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.fsizeTooltip.ToolTipTitle = "Full Size";
+            // 
+            // outputTooltip
+            // 
+            this.outputTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.outputTooltip.ToolTipTitle = "Output";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label7.Location = new System.Drawing.Point(6, 255);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(260, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Hover over the parameter names to see a help tooltip.";
             // 
             // MainForm
             // 
@@ -272,6 +328,13 @@ namespace FlagPFPGUI
         private System.Windows.Forms.Button generateButton;
         private System.Windows.Forms.Button quitButton;
         private System.Windows.Forms.Button aboutButton;
+        private System.Windows.Forms.ToolTip inputTooltip;
+        private System.Windows.Forms.ToolTip flagTooltip;
+        private System.Windows.Forms.ToolTip marginTooltip;
+        private System.Windows.Forms.ToolTip insizeTooltip;
+        private System.Windows.Forms.ToolTip fsizeTooltip;
+        private System.Windows.Forms.ToolTip outputTooltip;
+        private System.Windows.Forms.Label label7;
     }
 }
 

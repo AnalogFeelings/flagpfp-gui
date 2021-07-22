@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace DLH
+namespace FlagPFPGUI
 {
     public partial class AboutForm : Form
     {
