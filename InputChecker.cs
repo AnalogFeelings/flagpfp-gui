@@ -44,6 +44,13 @@ namespace FlagPFPGUI
                 EnableControls();
                 return false;
             }
+            if (flagCombo2.SelectedIndex != -1 && !FlagMaker.FlagDictionary.ContainsKey(flagCombo2.GetItemText(flagCombo2.SelectedItem)))
+            {
+                MessageBox.Show("Invalid secondary flag!", "Error!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                EnableControls();
+                return false;
+            }
             return true;
         }
 

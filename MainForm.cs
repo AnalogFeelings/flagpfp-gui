@@ -33,6 +33,11 @@ namespace FlagPFPGUI
             flagCombo.DisplayMember = "Key";
             flagCombo.ValueMember = "Key";
             flagCombo.SelectedIndex = 0;
+
+            flagCombo2.DataSource = new BindingSource(FlagMaker.FlagDictionary, null);
+            flagCombo2.DisplayMember = "Key";
+            flagCombo2.ValueMember = "Key";
+            flagCombo2.SelectedIndex = -1;
         }
 
         private void generateButton_Click(object sender, EventArgs e)
@@ -50,8 +55,9 @@ namespace FlagPFPGUI
 
             try
             {
-                FlagMaker.ExecuteProcessing(inputBox.Text, flagCombo.GetItemText(flagCombo.SelectedItem),
-                    pixelMargin, innerSize, fullSize, outputBox.Text);
+                FlagMaker.ExecuteProcessing(inputBox.Text, pixelMargin, innerSize, fullSize,
+                    outputBox.Text, flagCombo.GetItemText(flagCombo.SelectedItem),
+                    flagCombo2.SelectedIndex == -1 ? "" : flagCombo2.GetItemText(flagCombo2.SelectedItem));
             }
             catch (InvalidFlagException)
             {

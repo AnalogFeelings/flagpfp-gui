@@ -31,6 +31,10 @@ namespace FlagPFPGUI
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.flagCombo2 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.aboutButton = new System.Windows.Forms.Button();
             this.quitButton = new System.Windows.Forms.Button();
             this.generateButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -48,20 +52,21 @@ namespace FlagPFPGUI
             this.label1 = new System.Windows.Forms.Label();
             this.inputBox = new System.Windows.Forms.TextBox();
             this.previewPicture = new System.Windows.Forms.PictureBox();
-            this.aboutButton = new System.Windows.Forms.Button();
             this.inputTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.flagTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.marginTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.insizeTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.fsizeTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.outputTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.label7 = new System.Windows.Forms.Label();
+            this.flag2Tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.flagCombo2);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.aboutButton);
             this.groupBox2.Controls.Add(this.quitButton);
@@ -87,6 +92,47 @@ namespace FlagPFPGUI
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Settings";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(20, 75);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "*Flag 2";
+            this.flag2Tooltip.SetToolTip(this.label8, "Choose the secondary pride flag from this combo box.\r\nIt will create a \"50/50\" pa" +
+        "ttern where half of the image will\r\nbe the primary flag and the other half will " +
+        "be this one.");
+            // 
+            // flagCombo2
+            // 
+            this.flagCombo2.FormattingEnabled = true;
+            this.flagCombo2.Location = new System.Drawing.Point(66, 72);
+            this.flagCombo2.Name = "flagCombo2";
+            this.flagCombo2.Size = new System.Drawing.Size(358, 21);
+            this.flagCombo2.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label7.Location = new System.Drawing.Point(6, 242);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(260, 26);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "An asterisk means Optional Parameter.\r\nHover over the parameter names to see a he" +
+    "lp tooltip.";
+            // 
+            // aboutButton
+            // 
+            this.aboutButton.Location = new System.Drawing.Point(87, 271);
+            this.aboutButton.Name = "aboutButton";
+            this.aboutButton.Size = new System.Drawing.Size(75, 23);
+            this.aboutButton.TabIndex = 16;
+            this.aboutButton.Text = "About";
+            this.aboutButton.UseVisualStyleBackColor = true;
+            this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
+            // 
             // quitButton
             // 
             this.quitButton.Location = new System.Drawing.Point(6, 271);
@@ -109,7 +155,7 @@ namespace FlagPFPGUI
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 153);
+            this.label6.Location = new System.Drawing.Point(21, 180);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(39, 13);
             this.label6.TabIndex = 13;
@@ -118,7 +164,7 @@ namespace FlagPFPGUI
             // 
             // outputBrowseButton
             // 
-            this.outputBrowseButton.Location = new System.Drawing.Point(349, 148);
+            this.outputBrowseButton.Location = new System.Drawing.Point(349, 175);
             this.outputBrowseButton.Name = "outputBrowseButton";
             this.outputBrowseButton.Size = new System.Drawing.Size(75, 23);
             this.outputBrowseButton.TabIndex = 12;
@@ -128,7 +174,7 @@ namespace FlagPFPGUI
             // 
             // outputBox
             // 
-            this.outputBox.Location = new System.Drawing.Point(66, 150);
+            this.outputBox.Location = new System.Drawing.Point(66, 177);
             this.outputBox.Name = "outputBox";
             this.outputBox.Size = new System.Drawing.Size(277, 20);
             this.outputBox.TabIndex = 11;
@@ -136,7 +182,7 @@ namespace FlagPFPGUI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 127);
+            this.label5.Location = new System.Drawing.Point(14, 154);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 10;
@@ -145,7 +191,7 @@ namespace FlagPFPGUI
             // 
             // fsizeBox
             // 
-            this.fsizeBox.Location = new System.Drawing.Point(66, 124);
+            this.fsizeBox.Location = new System.Drawing.Point(66, 151);
             this.fsizeBox.Name = "fsizeBox";
             this.fsizeBox.Size = new System.Drawing.Size(358, 20);
             this.fsizeBox.TabIndex = 9;
@@ -153,7 +199,7 @@ namespace FlagPFPGUI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 101);
+            this.label4.Location = new System.Drawing.Point(6, 128);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 13);
             this.label4.TabIndex = 8;
@@ -162,7 +208,7 @@ namespace FlagPFPGUI
             // 
             // insizeBox
             // 
-            this.insizeBox.Location = new System.Drawing.Point(66, 98);
+            this.insizeBox.Location = new System.Drawing.Point(66, 125);
             this.insizeBox.Name = "insizeBox";
             this.insizeBox.Size = new System.Drawing.Size(358, 20);
             this.insizeBox.TabIndex = 7;
@@ -170,7 +216,7 @@ namespace FlagPFPGUI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 75);
+            this.label3.Location = new System.Drawing.Point(21, 102);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 13);
             this.label3.TabIndex = 6;
@@ -179,7 +225,7 @@ namespace FlagPFPGUI
             // 
             // marginBox
             // 
-            this.marginBox.Location = new System.Drawing.Point(66, 72);
+            this.marginBox.Location = new System.Drawing.Point(66, 99);
             this.marginBox.Name = "marginBox";
             this.marginBox.Size = new System.Drawing.Size(358, 20);
             this.marginBox.TabIndex = 5;
@@ -239,55 +285,47 @@ namespace FlagPFPGUI
             this.previewPicture.TabIndex = 2;
             this.previewPicture.TabStop = false;
             // 
-            // aboutButton
-            // 
-            this.aboutButton.Location = new System.Drawing.Point(87, 271);
-            this.aboutButton.Name = "aboutButton";
-            this.aboutButton.Size = new System.Drawing.Size(75, 23);
-            this.aboutButton.TabIndex = 16;
-            this.aboutButton.Text = "About";
-            this.aboutButton.UseVisualStyleBackColor = true;
-            this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
-            // 
             // inputTooltip
             // 
+            this.inputTooltip.IsBalloon = true;
             this.inputTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.inputTooltip.ToolTipTitle = "Input";
             // 
             // flagTooltip
             // 
+            this.flagTooltip.IsBalloon = true;
             this.flagTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.flagTooltip.ToolTipTitle = "Flag";
             // 
             // marginTooltip
             // 
+            this.marginTooltip.IsBalloon = true;
             this.marginTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.marginTooltip.ToolTipTitle = "Margin";
             // 
             // insizeTooltip
             // 
+            this.insizeTooltip.IsBalloon = true;
             this.insizeTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.insizeTooltip.ToolTipTitle = "Inner Size";
             // 
             // fsizeTooltip
             // 
+            this.fsizeTooltip.IsBalloon = true;
             this.fsizeTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.fsizeTooltip.ToolTipTitle = "Full Size";
             // 
             // outputTooltip
             // 
+            this.outputTooltip.IsBalloon = true;
             this.outputTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.outputTooltip.ToolTipTitle = "Output";
             // 
-            // label7
+            // flag2Tooltip
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label7.Location = new System.Drawing.Point(6, 255);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(260, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Hover over the parameter names to see a help tooltip.";
+            this.flag2Tooltip.IsBalloon = true;
+            this.flag2Tooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.flag2Tooltip.ToolTipTitle = "Flag 2";
             // 
             // MainForm
             // 
@@ -335,6 +373,9 @@ namespace FlagPFPGUI
         private System.Windows.Forms.ToolTip fsizeTooltip;
         private System.Windows.Forms.ToolTip outputTooltip;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox flagCombo2;
+        private System.Windows.Forms.ToolTip flag2Tooltip;
     }
 }
 

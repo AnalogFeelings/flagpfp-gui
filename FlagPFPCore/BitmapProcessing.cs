@@ -7,6 +7,11 @@ namespace FlagPFPCore.Processing
     {
         public int FinalImageSize;
 
+        public void SetFullImageSize(int size)
+        {
+            FinalImageSize = size;
+        }
+
         public Bitmap StitchTogether(ref Bitmap flag, ref Bitmap pic, int picSize)
         {
             Bitmap res = new Bitmap(FinalImageSize, FinalImageSize);
@@ -26,6 +31,7 @@ namespace FlagPFPCore.Processing
             Bitmap result = new Bitmap(width, height);
             using (Graphics g = Graphics.FromImage(result))
             {
+                g.Clear(Color.Transparent);
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 g.DrawImage(source, 0, 0, width, height);
             }
@@ -43,6 +49,16 @@ namespace FlagPFPCore.Processing
                     (FinalImageSize - widthHeight) / 2, widthHeight, widthHeight);
             }
             return flagImg;
+        }
+
+        public Bitmap ProcessSecondaryFlag(ref Bitmap flag2Img)
+        {
+            using (Graphics g = Graphics.FromImage(flag2Img))
+            {
+                g.CompositingMode = CompositingMode.SourceCopy;
+                g.FillRectangle(Brushes.Transparent, new Rectangle(0, 0, flag2Img.Width / 2, flag2Img.Height));
+            }
+            return flag2Img;
         }
     }
 }
