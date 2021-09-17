@@ -48,7 +48,7 @@ namespace FlagPFPGUI
             int innerSize = 0;
 
             if (!CheckInputOutputBox()) return;
-            if (!CheckFlagCombo()) return;
+            //if (!CheckFlagCombo()) return;
             if (!CheckMarginBox(ref pixelMargin)) return;
             if (!CheckInnerSizeBox(ref innerSize)) return;
             if (!CheckFullSizeBox(ref fullSize)) return;
@@ -56,8 +56,7 @@ namespace FlagPFPGUI
             try
             {
                 FlagMaker.ExecuteProcessing(inputBox.Text, pixelMargin, innerSize, fullSize,
-                    outputBox.Text, flagCombo.GetItemText(flagCombo.SelectedItem),
-                    flagCombo2.SelectedIndex == -1 ? "" : flagCombo2.GetItemText(flagCombo2.SelectedItem));
+                    outputBox.Text, "transgender", "bisexual");
             }
             catch (InvalidFlagException)
             {

@@ -51,12 +51,12 @@ namespace FlagPFPCore.Processing
             return flagImg;
         }
 
-        public Bitmap ProcessSecondaryFlag(ref Bitmap flag2Img)
+        public Bitmap ProcessSecondaryFlag(ref Bitmap flag2Img, int width)
         {
             using (Graphics g = Graphics.FromImage(flag2Img))
             {
                 g.CompositingMode = CompositingMode.SourceCopy;
-                g.FillRectangle(Brushes.Transparent, new Rectangle(0, 0, flag2Img.Width / 2, flag2Img.Height));
+                g.FillRectangle(Brushes.Transparent, new Rectangle(0, 0, width, flag2Img.Height));
             }
             return flag2Img;
         }

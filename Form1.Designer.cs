@@ -31,7 +31,6 @@ namespace FlagPFPGUI
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.flagCombo2 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.aboutButton = new System.Windows.Forms.Button();
@@ -59,6 +58,7 @@ namespace FlagPFPGUI
             this.fsizeTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.outputTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.flag2Tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewPicture)).BeginInit();
             this.SuspendLayout();
@@ -91,18 +91,6 @@ namespace FlagPFPGUI
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Settings";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(20, 75);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(40, 13);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "*Flag 2";
-            this.flag2Tooltip.SetToolTip(this.label8, "Choose the secondary pride flag from this combo box.\r\nIt will create a \"50/50\" pa" +
-        "ttern where half of the image will\r\nbe the primary flag and the other half will " +
-        "be this one.");
             // 
             // flagCombo2
             // 
@@ -327,6 +315,18 @@ namespace FlagPFPGUI
             this.flag2Tooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.flag2Tooltip.ToolTipTitle = "Flag 2";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(20, 75);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "*Flag 2";
+            this.flag2Tooltip.SetToolTip(this.label8, "Choose the secondary pride flag from this combo box.\r\nIt will create a \"50/50\" pa" +
+        "ttern where half of the image will\r\nbe the primary flag and the other half will " +
+        "be this one.");
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,9 +373,9 @@ namespace FlagPFPGUI
         private System.Windows.Forms.ToolTip fsizeTooltip;
         private System.Windows.Forms.ToolTip outputTooltip;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox flagCombo2;
         private System.Windows.Forms.ToolTip flag2Tooltip;
+        private System.Windows.Forms.Label label8;
     }
 }
 
