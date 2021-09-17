@@ -102,7 +102,6 @@ namespace FlagPFPGUI
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AboutForm";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "About FlagPFP GUI v";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
