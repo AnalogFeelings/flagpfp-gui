@@ -10,4 +10,4 @@ Due to compatibility issues with Newtonsoft.Json and NET Standard 2.0, I decided
 Open the .sln file in VS2019 and build for Debug/Release, then copy the "Flags" and "Flag JSONs" folder to the directory of the executable.
 
 # How the program looks:
-![example](readmepic.png)
+![example](picreadme.png)
