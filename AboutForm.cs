@@ -9,6 +9,8 @@ namespace FlagPFPGUI
         public AboutForm()
         {
             InitializeComponent();
+            label1.Text += Properties.Resources.ProgramVersion;
+            this.Text += Properties.Resources.ProgramVersion;
         }
 
         private void githubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

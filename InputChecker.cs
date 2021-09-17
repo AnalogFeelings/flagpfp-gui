@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace FlagPFPGUI
 {
@@ -28,25 +23,11 @@ namespace FlagPFPGUI
             return true;
         }
 
-        public bool CheckFlagCombo()
+        public bool CheckFlagRows()
         {
-            if (flagCombo.SelectedIndex == -1)
+            if (flagsDataGrid.Rows.Count == 1 && flagsDataGrid.Rows[0].IsNewRow)
             {
-                MessageBox.Show("Select a flag!", "Error!",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                EnableControls();
-                return false;
-            }
-            if(!FlagMaker.FlagDictionary.ContainsKey(flagCombo.GetItemText(flagCombo.SelectedItem)))
-            {
-                MessageBox.Show("Invalid flag!", "Error!",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                EnableControls();
-                return false;
-            }
-            if (flagCombo2.SelectedIndex != -1 && !FlagMaker.FlagDictionary.ContainsKey(flagCombo2.GetItemText(flagCombo2.SelectedItem)))
-            {
-                MessageBox.Show("Invalid secondary flag!", "Error!",
+                MessageBox.Show("Provide at least 1 flag!", "Error!",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 EnableControls();
                 return false;
