@@ -7,7 +7,7 @@ Now supports a large number of flags in the same image!
 Due to compatibility issues with Newtonsoft.Json and NET Standard 2.0, I decided to integrate the code into the windows forms app, which is .NET Framework 4.7.2
 
 ## Building
-Open the .sln file in VS2019 and build for Debug/Release, then copy the "Flags" and "Flag JSONs" folder to the directory of the executable.
+Open the .sln file in VS2022 and select Debug or Release, then build it.
 
 # Program Screenshot
 ![example](picreadme.png)
