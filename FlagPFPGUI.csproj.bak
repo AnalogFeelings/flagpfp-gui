@@ -108,7 +108,7 @@
     <Content Include="Flag JSONs\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-	<Content Include="Flags\**">
+	<Content Include="Flag JSONs\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
