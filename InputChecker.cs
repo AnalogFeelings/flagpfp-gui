@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.IO;
+using System.Windows.Forms;
 
 namespace FlagPFPGUI
 {
@@ -6,18 +7,22 @@ namespace FlagPFPGUI
 	{
 		public bool CheckInputOutputBox()
 		{
-			if (inputBox.Text == string.Empty)
+			if (inputBox.Text == string.Empty || !File.Exists(inputBox.Text))
 			{
-				MessageBox.Show("Input image field must not be empty!", "Error!",
+				MessageBox.Show("Input image field must be a valid file path!", "Error!",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
+
 				EnableControls();
+
 				return false;
 			}
 			if (outputBox.Text == string.Empty)
 			{
-				MessageBox.Show("Output image field must not be empty!", "Error!",
+				MessageBox.Show("Output image field must be a valid file path!", "Error!",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
+
 				EnableControls();
+
 				return false;
 			}
 			return true;
@@ -25,70 +30,49 @@ namespace FlagPFPGUI
 
 		public bool CheckFlagRows()
 		{
-			if (flagsDataGrid.Rows.Count == 1 && flagsDataGrid.Rows[0].IsNewRow)
+			bool Found = false;
+
+			foreach(DataGridViewRow row in flagsDataGrid.Rows)
+			{
+				if (row.Cells[0].FormattedValue.ToString() == string.Empty) continue;
+				Found = true;
+				break;
+			}
+
+			if(!Found)
 			{
 				MessageBox.Show("Provide at least 1 flag!", "Error!",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
+
 				EnableControls();
+
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool CheckMarginBox(int margin)
+		{
+			if(marginBox.Value < 0)
+			{
+				MessageBox.Show("Margin must not be smaller than 0", "Error!",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+				EnableControls();
+
 				return false;
 			}
 			return true;
 		}
 
-		public bool CheckMarginBox(ref int margin)
+		public bool CheckInnerSizeBox(int insize)
 		{
-			if (marginBox.Text == string.Empty)
-			{
-				MessageBox.Show("Add a pixel margin!", "Error!",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				EnableControls();
-				return false;
-			}
-			if (!int.TryParse(marginBox.Text, out margin))
-			{
-				MessageBox.Show("Provide a valid pixel margin!", "Error!",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				EnableControls();
-				return false;
-			}
 			return true;
 		}
 
-		public bool CheckInnerSizeBox(ref int insize)
+		public bool CheckFullSizeBox(int fsize)
 		{
-			if (insizeBox.Text == string.Empty)
-			{
-				MessageBox.Show("Add an inner size!", "Error!",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				EnableControls();
-				return false;
-			}
-			if (!int.TryParse(insizeBox.Text, out insize))
-			{
-				MessageBox.Show("Provide a valid inner size!", "Error!",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				EnableControls();
-				return false;
-			}
-			return true;
-		}
-
-		public bool CheckFullSizeBox(ref int fsize)
-		{
-			if (fsizeBox.Text == string.Empty)
-			{
-				MessageBox.Show("Add a full size!", "Error!",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				EnableControls();
-				return false;
-			}
-			if (!int.TryParse(fsizeBox.Text, out fsize))
-			{
-				MessageBox.Show("Provide a valid full size!", "Error!",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				EnableControls();
-				return false;
-			}
 			return true;
 		}
 	}

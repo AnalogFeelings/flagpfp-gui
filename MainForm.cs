@@ -2,6 +2,7 @@
 using FlagPFPCore.FlagMaking;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace FlagPFPGUI
@@ -10,11 +11,14 @@ namespace FlagPFPGUI
 	{
 		public FlagCoreObject FlagMaker = new FlagCoreObject("Flags");
 
+		public int InputWidth = 0;
+		public int InputHeight = 0;
+
 		public MainForm()
 		{
 			InitializeComponent();
 
-			this.Text += Properties.Resources.ProgramVersion;
+			this.Text += Assembly.GetAssembly(typeof(MainForm)).GetName().Version.ToString(2);
 
 			try
 			{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace FlagPFPGUI
@@ -9,8 +10,7 @@ namespace FlagPFPGUI
 		public AboutForm()
 		{
 			InitializeComponent();
-			label1.Text += Properties.Resources.ProgramVersion;
-			this.Text += Properties.Resources.ProgramVersion;
+			VersionLabel.Text += Assembly.GetAssembly(typeof(MainForm)).GetName().Version.ToString(2);
 		}
 
 		private void githubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

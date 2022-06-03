@@ -14,10 +14,11 @@ namespace FlagPFPCore.Loading
 
 	internal class FlagLoader
 	{
-		public Dictionary<string, PrideFlag> LoadFlags(string folder)
+		public Dictionary<string, PrideFlag> LoadFlags(string folder, string imageDir)
 		{
 			List<string> files = Directory.GetFiles(folder).ToList();
 			if (files.Count == 0) throw new NoFlagsFoundException();
+
 			Dictionary<string, PrideFlag> finalList = new Dictionary<string, PrideFlag>();
 
 			foreach (string file in files)
@@ -25,8 +26,9 @@ namespace FlagPFPCore.Loading
 				string jsonContent = File.ReadAllText(file);
 				PrideFlag flag = JsonConvert.DeserializeObject<PrideFlag>(jsonContent);
 
-				if (!string.IsNullOrWhiteSpace(flag.FlagFile)) finalList.Add(flag.ParameterName, flag);
+				if (!string.IsNullOrWhiteSpace(flag.FlagFile) && File.Exists(Path.Combine(imageDir, flag.FlagFile))) finalList.Add(flag.ParameterName, flag);
 			}
+
 			return finalList;
 		}
 	}

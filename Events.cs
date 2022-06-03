@@ -1,5 +1,9 @@
-﻿using System;
+﻿using FlagPFPGUI.FlagPFPCore;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace FlagPFPGUI
@@ -10,15 +14,26 @@ namespace FlagPFPGUI
 		{
 			DisableControls();
 
-			int PixelMargin = 0;
-			int FullSize = 0;
-			int InnerSize = 0;
+			int PixelMargin = (int)Math.Floor(marginBox.Value);
+			int FullSize = (int)Math.Floor(fsizeBox.Value);
+			int InnerSize = (int)Math.Floor(insizeBox.Value);
 
 			if (!CheckInputOutputBox()) return;
 			if (!CheckFlagRows()) return;
-			if (!CheckMarginBox(ref PixelMargin)) return;
-			if (!CheckInnerSizeBox(ref InnerSize)) return;
-			if (!CheckFullSizeBox(ref FullSize)) return;
+
+			string FullOutputPath = Path.GetFullPath(outputBox.Text);
+
+			if (InputWidth % 2 != 0 || InputHeight % 2 != 0)
+			{
+				MessageBox.Show("The size of the input image is not even!\nThe scaling may look bad, especially if its low resolution pixel art.", "Warning!",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+			if(FullSize % 2 != 0)
+			{
+				MessageBox.Show("The size of the output image is not even!\nThe scaling may look bad, especially if its low resolution pixel art.\n" +
+					"The circular window in the middle will also be uncentered.", "Warning!",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
 
 			try
 			{
@@ -26,13 +41,33 @@ namespace FlagPFPGUI
 
 				foreach (DataGridViewRow Row in flagsDataGrid.Rows)
 				{
-					string rowValue = (Row.Cells[0] as DataGridViewComboBoxCell).FormattedValue.ToString();
-					if (rowValue == string.Empty) continue;
-					ChosenFlags.Add(rowValue);
+					string RowValue = (Row.Cells[0] as DataGridViewComboBoxCell).FormattedValue.ToString();
+					if (RowValue == string.Empty) continue;
+
+					ChosenFlags.Add(RowValue);
 				}
 
-				FlagMaker.ExecuteProcessing(inputBox.Text, PixelMargin, InnerSize, FullSize,
-					outputBox.Text, ChosenFlags.ToArray());
+				FlagParameters Parameters = new FlagParameters
+				{
+					InputImagePath = inputBox.Text,
+					OutputImagePath = outputBox.Text,
+					OutputImageSize = FullSize,
+					InnerImageSize = InnerSize,
+					RingPixelMargin = PixelMargin,
+					RotateFlag90 = rotateCheckbox.Checked,
+					FlipFlagHorizontally = flipHoriCheckbox.Checked,
+					FlipFlagVertically = flipVeriCheckbox.Checked,
+					Flags = ChosenFlags
+				};
+
+				FlagMaker.ExecuteProcessing(Parameters);
+
+				if(showAfterwardsCheckbox.Checked)
+				{
+					string arguments = string.Format("/select,\"{0}\"", FullOutputPath);
+
+					Process.Start("explorer.exe", arguments);
+				}
 			}
 			catch (Exception ex)
 			{
@@ -44,7 +79,7 @@ namespace FlagPFPGUI
 				return;
 			}
 
-			previewPicture.ImageLocation = outputBox.Text;
+			previewPicture.ImageLocation = FullOutputPath;
 
 			EnableControls();
 		}
@@ -59,6 +94,8 @@ namespace FlagPFPGUI
 				if (FileDialog.ShowDialog() == DialogResult.OK)
 				{
 					inputBox.Text = FileDialog.FileName;
+
+					CheckInputFile();
 				}
 			}
 		}
@@ -133,11 +170,44 @@ namespace FlagPFPGUI
 		{
 			Application.Exit();
 		}
+
+		private void inputBox_TextChanged(object sender, EventArgs e)
+		{
+			CheckInputFile();
+		}
+
+		private void CheckInputFile()
+		{
+			if (!File.Exists(inputBox.Text))
+			{
+				inputStatus.Text = "Unable to load file. Check if the path is correct.";
+				return;
+			}
+
+			using (Bitmap Target = (Bitmap)Image.FromFile(inputBox.Text))
+			{
+				InputWidth = Target.Width;
+				InputHeight = Target.Height;
+
+				inputStatus.Text = $"Loaded image with size {InputWidth}x{InputHeight}.";
+			}
+		}
+
 		private void flagsDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			DataGridViewComboBoxEditingControl EditingControl = flagsDataGrid.EditingControl as DataGridViewComboBoxEditingControl;
 
 			if (EditingControl != null) EditingControl.DroppedDown = true;
+		}
+
+		private void upAndDown_Leave(object sender, EventArgs e)
+		{
+			NumericUpDown Target = sender as NumericUpDown;
+
+			if (Target.Text == string.Empty)
+			{
+				Target.Text = "0";
+			}
 		}
 	}
 }

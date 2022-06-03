@@ -1,6 +1,7 @@
 ﻿using FlagPFPCore.Exceptions;
 using FlagPFPCore.Loading;
 using FlagPFPCore.Processing;
+using FlagPFPGUI.FlagPFPCore;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -21,17 +22,16 @@ namespace FlagPFPCore.FlagMaking
 		public void LoadFlagDefsFromDir(string dir)
 		{
 			FlagLoader flagLoader = new FlagLoader();
-			FlagDictionary = flagLoader.LoadFlags(dir);
+			FlagDictionary = flagLoader.LoadFlags(dir, FlagsDirectory);
 		}
 
-		public void ExecuteProcessing(string inputImage, int pixelMargin, int innerSize,
-			int fullSize, string outputImage, params string[] flags)
+		public void ExecuteProcessing(FlagParameters Parameters)
 		{
 			BitmapProcessing bitmapProcessor = new BitmapProcessing();
-			bitmapProcessor.SetFullImageSize(fullSize);
+			bitmapProcessor.SetFullImageSize(Parameters.OutputImageSize);
 
 			List<PrideFlag> chosenFlags = new List<PrideFlag>();
-			foreach (string chosenFlag in flags)
+			foreach (string chosenFlag in Parameters.Flags)
 			{
 				PrideFlag outputFlag;
 				if (!FlagDictionary.TryGetValue(chosenFlag, out outputFlag))
@@ -41,30 +41,46 @@ namespace FlagPFPCore.FlagMaking
 				chosenFlags.Add(outputFlag);
 			}
 
-			Bitmap inputBmp = bitmapProcessor.LoadAndResizeBmp(inputImage, fullSize, fullSize);
+			Bitmap inputBmp = bitmapProcessor.LoadAndResizeBmp(Parameters.InputImagePath, Parameters.OutputImageSize, Parameters.OutputImageSize);
 			Bitmap primaryFlagBmp = bitmapProcessor.LoadAndResizeBmp(Path.Combine(FlagsDirectory, chosenFlags[0].FlagFile),
-																fullSize, fullSize);
+																Parameters.OutputImageSize, Parameters.OutputImageSize);
 
-			Bitmap croppedPrimaryFlagBmp = bitmapProcessor.CropFlag(ref primaryFlagBmp, pixelMargin);
+			Bitmap transformedPrimaryFlagBmp = bitmapProcessor.ProcessFlagTransformation(ref primaryFlagBmp, Parameters.RotateFlag90,
+				Parameters.FlipFlagHorizontally, Parameters.FlipFlagVertically);
+
+			Bitmap croppedPrimaryFlagBmp = bitmapProcessor.CropFlag(ref transformedPrimaryFlagBmp, Parameters.RingPixelMargin);
 			// Place primary flag now.
-			Bitmap finalBmp = bitmapProcessor.StitchTogether(ref croppedPrimaryFlagBmp, ref inputBmp, innerSize);
+			Bitmap finalBmp = bitmapProcessor.StitchTogether(ref croppedPrimaryFlagBmp, ref inputBmp, Parameters.InnerImageSize);
 			chosenFlags.RemoveAt(0);
 
-			int segmentWidth = finalBmp.Width / flags.Length;
+			int segmentWidth = finalBmp.Width / Parameters.Flags.Count;
 			int currentWidth = segmentWidth;
 			foreach (PrideFlag prideFlag in chosenFlags)
 			{
 				Bitmap secondaryFlagBmp = bitmapProcessor.LoadAndResizeBmp(Path.Combine(FlagsDirectory, prideFlag.FlagFile),
-																			fullSize, fullSize);
-				Bitmap croppedSecondaryFlagBmp = bitmapProcessor.CropFlag(ref secondaryFlagBmp, pixelMargin);
+																			Parameters.OutputImageSize, Parameters.OutputImageSize);
+				Bitmap transformedSecondaryFlagBmp = bitmapProcessor.ProcessFlagTransformation(ref secondaryFlagBmp, Parameters.RotateFlag90,
+					Parameters.FlipFlagHorizontally, Parameters.FlipFlagVertically);
+
+				Bitmap croppedSecondaryFlagBmp = bitmapProcessor.CropFlag(ref transformedSecondaryFlagBmp, Parameters.RingPixelMargin);
 				croppedSecondaryFlagBmp = bitmapProcessor.ProcessSecondaryFlag(ref croppedSecondaryFlagBmp, currentWidth);
 
-				finalBmp = bitmapProcessor.StitchTogether(ref croppedSecondaryFlagBmp, ref finalBmp, fullSize);
+				finalBmp = bitmapProcessor.StitchTogether(ref croppedSecondaryFlagBmp, ref finalBmp, Parameters.OutputImageSize);
 
 				currentWidth += segmentWidth;
+
+				secondaryFlagBmp.Dispose();
+				transformedSecondaryFlagBmp.Dispose();
+				croppedSecondaryFlagBmp.Dispose();
 			}
 
-			finalBmp.Save(outputImage, ImageFormat.Png);
+			finalBmp.Save(Parameters.OutputImagePath, ImageFormat.Png);
+
+			inputBmp.Dispose();
+			primaryFlagBmp.Dispose();
+			transformedPrimaryFlagBmp.Dispose();
+			croppedPrimaryFlagBmp.Dispose();
+			finalBmp.Dispose();
 		}
 	}
 }
