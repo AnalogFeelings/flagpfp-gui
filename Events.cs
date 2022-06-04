@@ -1,12 +1,10 @@
 ﻿using FlagPFPCore.Loading;
-using FlagPFPGUI.FlagPFPCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using WebPWrapper;
 
 namespace FlagPFPGUI
 {
@@ -21,18 +19,14 @@ namespace FlagPFPGUI
 			int InnerSize = (int)Math.Floor(insizeBox.Value);
 
 			if (!CheckInputOutputBox()) return;
-			if (!CheckFlagRows()) return;
-			if (!CheckMarginBox()) return;
+			if (!CheckInputExtension()) return;
 			if (!CheckOutputExtension()) return;
+			if (!CheckMarginBox()) return;
+			if (!CheckFlagRows()) return;
 
 			string FullOutputPath = Path.GetFullPath(outputBox.Text);
 
-			if (InputWidth % 2 != 0 || InputHeight % 2 != 0)
-			{
-				MessageBox.Show("The size of the input image is not even!\nThe scaling may look bad, especially if its low resolution pixel art.", "Warning!",
-					MessageBoxButtons.OK, MessageBoxIcon.Warning);
-			}
-			if(FullSize % 2 != 0)
+			if (FullSize % 2 != 0)
 			{
 				MessageBox.Show("The size of the output image is not even!\nThe scaling may look bad, especially if its low resolution pixel art.\n" +
 					"The circular window in the middle will also be uncentered.", "Warning!",
@@ -64,9 +58,12 @@ namespace FlagPFPGUI
 					Flags = ChosenFlags
 				};
 
-				FlagMaker.ExecuteProcessing(Parameters);
+				Bitmap ProcessedImage = FlagMaker.ExecuteProcessing(Parameters);
+				previewPicture.Image = (Image)ProcessedImage.Clone();
 
-				if(showAfterwardsCheckbox.Checked)
+				FlagMaker.ExportBitmap(ref ProcessedImage, Parameters.OutputImagePath);
+
+				if (showAfterwardsCheckbox.Checked)
 				{
 					string arguments = string.Format("/select,\"{0}\"", FullOutputPath);
 
@@ -83,23 +80,13 @@ namespace FlagPFPGUI
 				return;
 			}
 
-			string Extension = Path.GetExtension(outputBox.Text);
-			switch(Extension)
-			{
-				case ".png":
-				case ".jpeg":
-				case ".jpg":
-					previewPicture.ImageLocation = Path.GetFullPath(outputBox.Text);
-					break;
-				case ".webp":
-					using(WebP WebpLoader = new WebP())
-					{
-						previewPicture.Image = WebpLoader.Load(outputBox.Text);
-					}
-					break;
-			}
-
 			EnableControls();
+		}
+
+		private void CreateFlagButton_Click(object sender, EventArgs e)
+		{
+			FlagCreatorForm CreatorForm = new FlagCreatorForm(this);
+			CreatorForm.Show();
 		}
 
 		private void inputBrowseButton_Click(object sender, EventArgs e)
@@ -107,7 +94,7 @@ namespace FlagPFPGUI
 			using (OpenFileDialog FileDialog = new OpenFileDialog())
 			{
 				FileDialog.InitialDirectory = "c:\\";
-				FileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg, *.jpeg)|*.jpg;*.jpeg|WEBP files (*.webp)|*.webp|All files (*.*)|*.*";
+				FileDialog.Filter = BrowserFilter;
 
 				if (FileDialog.ShowDialog() == DialogResult.OK)
 				{
@@ -121,7 +108,7 @@ namespace FlagPFPGUI
 			using (OpenFileDialog FileDialog = new OpenFileDialog())
 			{
 				FileDialog.InitialDirectory = "c:\\";
-				FileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg, *.jpeg)|*.jpg;*.jpeg|WEBP files (*.webp)|*.webp|All files (*.*)|*.*";
+				FileDialog.Filter = BrowserFilter;
 
 				if (FileDialog.ShowDialog() == DialogResult.OK)
 				{

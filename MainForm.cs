@@ -1,6 +1,7 @@
 ﻿using FlagPFPCore.Exceptions;
 using FlagPFPCore.FlagMaking;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -10,9 +11,10 @@ namespace FlagPFPGUI
 	public partial class MainForm : Form
 	{
 		public FlagCoreObject FlagMaker = new FlagCoreObject("Flags");
+		public string BrowserFilter = "All Supported Formats (*{0})|*{1}";
 
-		public int InputWidth = 0;
-		public int InputHeight = 0;
+		private BindingSource GridSource;
+		private DataGridViewComboBoxColumn ComboColumn;
 
 		public MainForm()
 		{
@@ -22,7 +24,7 @@ namespace FlagPFPGUI
 
 			try
 			{
-				FlagMaker.LoadFlagDefsFromDir("Flag JSONs");
+				LoadFlags();
 			}
 			catch (DirectoryNotFoundException)
 			{
@@ -39,15 +41,32 @@ namespace FlagPFPGUI
 				Environment.Exit(1);
 			}
 
-			DataGridViewComboBoxColumn ComboColumn = new DataGridViewComboBoxColumn
+			List<string> AllExtensions = FlagMaker.GetValidExtensions();
+			BrowserFilter = string.Format(BrowserFilter, string.Join(", *", AllExtensions), string.Join(";*", AllExtensions));
+
+			GridSource = new BindingSource(FlagMaker.FlagDictionary, null);
+
+			ComboColumn = new DataGridViewComboBoxColumn
 			{
-				DataSource = new BindingSource(FlagMaker.FlagDictionary, null),
+				DataSource = GridSource,
 				ValueMember = "Key",
 				DisplayMember = "Key",
 				AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 			};
 
 			flagsDataGrid.Columns.Add(ComboColumn);
+		}
+
+		public void LoadFlags()
+		{
+			FlagMaker.LoadFlagDefsFromDir("Flag JSONs");
+
+			if(GridSource != null)
+			{
+				GridSource = new BindingSource(FlagMaker.FlagDictionary, null);
+
+				ComboColumn.DataSource = GridSource;
+			}
 		}
 
 		public void DisableControls()

@@ -19,6 +19,23 @@ namespace FlagPFPCore.Exceptions
 		}
 	}
 
+	public class NoProcessorFoundException : Exception
+	{
+		public NoProcessorFoundException()
+		{
+		}
+
+		public NoProcessorFoundException(string message)
+			: base(message)
+		{
+		}
+
+		public NoProcessorFoundException(string message, Exception inner)
+			: base(message, inner)
+		{
+		}
+	}
+
 	public class InvalidFlagException : Exception
 	{
 		public InvalidFlagException()

@@ -1,27 +1,22 @@
-﻿using FlagPFPCore.Exceptions;
-using FlagPFPCore.Loading;
+﻿using FlagPFPCore.Loading;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
+using WebPWrapper;
 
 namespace FlagPFPCore.Processors
 {
-	internal class GdiProcessor : BaseProcessor
+	internal class WebpProcessor : BaseProcessor
 	{
 		public override List<string> ValidInputExtensions { get; protected set; } = new List<string>
 		{
-			".png",
-			".jpg",
-			".jpeg"
+			".webp"
 		};
 
 		public override List<string> ValidOutputExtensions { get; protected set; } = new List<string>
 		{
-			".png",
-			".jpg",
-			".jpeg"
+			".webp"
 		};
 
 		public override Bitmap ExecuteProcessing(FlagParameters Parameters, string FlagsDir, ref List<PrideFlag> Flags)
@@ -30,7 +25,8 @@ namespace FlagPFPCore.Processors
 
 			//Load input bitmap and primary flag.
 			Bitmap InputBitmap = LoadAndResizeImage(Parameters.InputImagePath, Parameters.OutputImageSize, Parameters.OutputImageSize);
-			Bitmap PrimaryFlagBitmap = LoadAndResizeFlag(Path.Combine(FlagsDir, Flags[0].FlagFile), Parameters.OutputImageSize, Parameters.OutputImageSize);
+			Bitmap PrimaryFlagBitmap = LoadAndResizeFlag(Path.Combine(FlagsDir, Flags[0].FlagFile),
+																	Parameters.OutputImageSize, Parameters.OutputImageSize);
 
 			//Do the transformations (rotate 90º, flip horizontally, etc).
 			Bitmap TransformedPrimaryFlagBitmap = ProcessFlagTransformation(ref PrimaryFlagBitmap, Parameters.RotateFlag90,
@@ -58,7 +54,8 @@ namespace FlagPFPCore.Processors
 			foreach (PrideFlag Flag in Flags)
 			{
 				//Load flag segment bitmap.
-				Bitmap SecondaryFlagBitmap = LoadAndResizeFlag(Path.Combine(FlagsDir, Flag.FlagFile), Parameters.OutputImageSize, Parameters.OutputImageSize);
+				Bitmap SecondaryFlagBitmap = LoadAndResizeFlag(Path.Combine(FlagsDir, Flag.FlagFile),
+															Parameters.OutputImageSize, Parameters.OutputImageSize);
 
 				//Do the transformations (rotate 90º, flip horizontally, etc).
 				Bitmap TransformedSecondaryFlagBitmap = ProcessFlagTransformation(ref SecondaryFlagBitmap, Parameters.RotateFlag90,
@@ -89,44 +86,22 @@ namespace FlagPFPCore.Processors
 
 		public override void ExportBitmap(ref Bitmap Picture, string Filename)
 		{
-			string Format = Path.GetExtension(Filename);
-			switch (Format)
+			using (WebP WebpExporter = new WebP())
 			{
-				case ".png":
-					Picture.Save(Filename, ImageFormat.Png);
-					break;
-				case ".jpeg":
-				case ".jpg":
-					ImageCodecInfo JpegEncoder = GetEncoder(ImageFormat.Jpeg);
-					Encoder Encoder = Encoder.Quality;
-					EncoderParameters EncoderParameters = new EncoderParameters(1);
-
-					EncoderParameter QualityParameter = new EncoderParameter(Encoder, 100L);
-					EncoderParameters.Param[0] = QualityParameter;
-
-					Picture.Save(Filename, JpegEncoder, EncoderParameters);
-					break;
+				WebpExporter.Save(Picture, Filename, 100);
 			}
 
 			Picture.Dispose();
 		}
 
-		private ImageCodecInfo GetEncoder(ImageFormat Format)
-		{
-			ImageCodecInfo[] Codecs = ImageCodecInfo.GetImageEncoders();
-			foreach (ImageCodecInfo Codec in Codecs)
-			{
-				if (Codec.FormatID == Format.Guid)
-				{
-					return Codec;
-				}
-			}
-			return null;
-		}
-
 		protected override Bitmap LoadAndResizeImage(string Filename, int Width, int Height)
 		{
-			Bitmap Source = new Bitmap(Filename);
+			Bitmap Source;
+			using (WebP WebpLoader = new WebP())
+			{
+				Source = WebpLoader.Load(Filename);
+			}
+
 			Bitmap Result = new Bitmap(Width, Height);
 
 			using (Graphics Graphics = Graphics.FromImage(Result))
@@ -216,3 +191,4 @@ namespace FlagPFPCore.Processors
 		}
 	}
 }
+

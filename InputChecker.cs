@@ -70,7 +70,22 @@ namespace FlagPFPGUI
 		{
 			if (!FlagMaker.IsExtensionValid(outputBox.Text))
 			{
-				MessageBox.Show("Output extension must be JPEG or PNG!", "Error!",
+				MessageBox.Show($"Output extension must be:\n{string.Join(", ", FlagMaker.GetValidExtensions().ToArray())}", "Error!",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+				EnableControls();
+
+				return false;
+			}
+
+			return true;
+		}
+
+		public bool CheckInputExtension()
+		{
+			if (!FlagMaker.IsExtensionValid(inputBox.Text))
+			{
+				MessageBox.Show($"Input extension must be:\n{string.Join(", ", FlagMaker.GetValidExtensions().ToArray())}", "Error!",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 				EnableControls();

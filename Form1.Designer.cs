@@ -67,7 +67,7 @@ namespace FlagPFPGUI
 			this.previewPicture = new System.Windows.Forms.PictureBox();
 			this.transTooltip = new System.Windows.Forms.ToolTip(this.components);
 			this.showAfterwardsCheckbox = new System.Windows.Forms.CheckBox();
-			this.button1 = new System.Windows.Forms.Button();
+			this.CreateFlagButton = new System.Windows.Forms.Button();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.fsizeBox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.insizeBox)).BeginInit();
@@ -452,23 +452,24 @@ namespace FlagPFPGUI
 			this.showAfterwardsCheckbox.Text = "Show in explorer afterwards";
 			this.showAfterwardsCheckbox.UseVisualStyleBackColor = true;
 			// 
-			// button1
+			// CreateFlagButton
 			// 
-			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button1.Location = new System.Drawing.Point(580, 437);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 16;
-			this.button1.Text = "Create Flag";
-			this.button1.UseVisualStyleBackColor = true;
+			this.CreateFlagButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.CreateFlagButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.CreateFlagButton.Location = new System.Drawing.Point(580, 437);
+			this.CreateFlagButton.Name = "CreateFlagButton";
+			this.CreateFlagButton.Size = new System.Drawing.Size(75, 23);
+			this.CreateFlagButton.TabIndex = 16;
+			this.CreateFlagButton.Text = "Create Flag";
+			this.CreateFlagButton.UseVisualStyleBackColor = true;
+			this.CreateFlagButton.Click += new System.EventHandler(this.CreateFlagButton_Click);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1115, 472);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.CreateFlagButton);
 			this.Controls.Add(this.showAfterwardsCheckbox);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.previewPicture);
@@ -529,7 +530,7 @@ namespace FlagPFPGUI
 		private System.Windows.Forms.CheckBox flipVeriCheckbox;
 		private System.Windows.Forms.ToolTip transTooltip;
 		private System.Windows.Forms.CheckBox showAfterwardsCheckbox;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button CreateFlagButton;
 	}
 }
 
