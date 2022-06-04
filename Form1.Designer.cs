@@ -37,7 +37,6 @@ namespace FlagPFPGUI
 			this.rotateCheckbox = new System.Windows.Forms.CheckBox();
 			this.fsizeBox = new System.Windows.Forms.NumericUpDown();
 			this.insizeBox = new System.Windows.Forms.NumericUpDown();
-			this.inputStatus = new System.Windows.Forms.Label();
 			this.marginBox = new System.Windows.Forms.NumericUpDown();
 			this.moveUp = new System.Windows.Forms.Button();
 			this.moveDown = new System.Windows.Forms.Button();
@@ -68,6 +67,7 @@ namespace FlagPFPGUI
 			this.previewPicture = new System.Windows.Forms.PictureBox();
 			this.transTooltip = new System.Windows.Forms.ToolTip(this.components);
 			this.showAfterwardsCheckbox = new System.Windows.Forms.CheckBox();
+			this.button1 = new System.Windows.Forms.Button();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.fsizeBox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.insizeBox)).BeginInit();
@@ -83,7 +83,6 @@ namespace FlagPFPGUI
 			this.groupBox2.Controls.Add(this.rotateCheckbox);
 			this.groupBox2.Controls.Add(this.fsizeBox);
 			this.groupBox2.Controls.Add(this.insizeBox);
-			this.groupBox2.Controls.Add(this.inputStatus);
 			this.groupBox2.Controls.Add(this.marginBox);
 			this.groupBox2.Controls.Add(this.moveUp);
 			this.groupBox2.Controls.Add(this.moveDown);
@@ -113,7 +112,7 @@ namespace FlagPFPGUI
 			// flipVeriCheckbox
 			// 
 			this.flipVeriCheckbox.AutoSize = true;
-			this.flipVeriCheckbox.Location = new System.Drawing.Point(303, 189);
+			this.flipVeriCheckbox.Location = new System.Drawing.Point(303, 167);
 			this.flipVeriCheckbox.Name = "flipVeriCheckbox";
 			this.flipVeriCheckbox.Size = new System.Drawing.Size(95, 19);
 			this.flipVeriCheckbox.TabIndex = 22;
@@ -123,7 +122,7 @@ namespace FlagPFPGUI
 			// flipHoriCheckbox
 			// 
 			this.flipHoriCheckbox.AutoSize = true;
-			this.flipHoriCheckbox.Location = new System.Drawing.Point(185, 189);
+			this.flipHoriCheckbox.Location = new System.Drawing.Point(185, 167);
 			this.flipHoriCheckbox.Name = "flipHoriCheckbox";
 			this.flipHoriCheckbox.Size = new System.Drawing.Size(112, 19);
 			this.flipHoriCheckbox.TabIndex = 22;
@@ -133,7 +132,7 @@ namespace FlagPFPGUI
 			// rotateCheckbox
 			// 
 			this.rotateCheckbox.AutoSize = true;
-			this.rotateCheckbox.Location = new System.Drawing.Point(99, 189);
+			this.rotateCheckbox.Location = new System.Drawing.Point(99, 167);
 			this.rotateCheckbox.Name = "rotateCheckbox";
 			this.rotateCheckbox.Size = new System.Drawing.Size(80, 19);
 			this.rotateCheckbox.TabIndex = 21;
@@ -142,7 +141,7 @@ namespace FlagPFPGUI
 			// 
 			// fsizeBox
 			// 
-			this.fsizeBox.Location = new System.Drawing.Point(99, 161);
+			this.fsizeBox.Location = new System.Drawing.Point(99, 138);
 			this.fsizeBox.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -155,7 +154,7 @@ namespace FlagPFPGUI
 			// 
 			// insizeBox
 			// 
-			this.insizeBox.Location = new System.Drawing.Point(99, 132);
+			this.insizeBox.Location = new System.Drawing.Point(99, 109);
 			this.insizeBox.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -166,19 +165,10 @@ namespace FlagPFPGUI
 			this.insizeBox.TabIndex = 5;
 			this.insizeBox.Leave += new System.EventHandler(this.upAndDown_Leave);
 			// 
-			// inputStatus
-			// 
-			this.inputStatus.Location = new System.Drawing.Point(99, 48);
-			this.inputStatus.Name = "inputStatus";
-			this.inputStatus.Size = new System.Drawing.Size(580, 23);
-			this.inputStatus.TabIndex = 20;
-			this.inputStatus.Text = "Waiting for input...";
-			this.inputStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
 			// marginBox
 			// 
 			this.marginBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.marginBox.Location = new System.Drawing.Point(99, 103);
+			this.marginBox.Location = new System.Drawing.Point(99, 80);
 			this.marginBox.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -236,7 +226,7 @@ namespace FlagPFPGUI
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(59, 215);
+			this.label2.Location = new System.Drawing.Point(59, 192);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(34, 15);
 			this.label2.TabIndex = 19;
@@ -260,17 +250,17 @@ namespace FlagPFPGUI
 			this.flagsDataGrid.BackgroundColor = System.Drawing.SystemColors.Control;
 			this.flagsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.flagsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-			this.flagsDataGrid.Location = new System.Drawing.Point(99, 215);
+			this.flagsDataGrid.Location = new System.Drawing.Point(99, 192);
 			this.flagsDataGrid.MultiSelect = false;
 			this.flagsDataGrid.Name = "flagsDataGrid";
-			this.flagsDataGrid.Size = new System.Drawing.Size(578, 145);
+			this.flagsDataGrid.Size = new System.Drawing.Size(578, 168);
 			this.flagsDataGrid.TabIndex = 7;
 			this.flagsDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.flagsDataGrid_CellClick);
 			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(27, 78);
+			this.label6.Location = new System.Drawing.Point(27, 54);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(66, 15);
 			this.label6.TabIndex = 13;
@@ -280,7 +270,7 @@ namespace FlagPFPGUI
 			// outputBrowseButton
 			// 
 			this.outputBrowseButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.outputBrowseButton.Location = new System.Drawing.Point(604, 74);
+			this.outputBrowseButton.Location = new System.Drawing.Point(604, 51);
 			this.outputBrowseButton.Name = "outputBrowseButton";
 			this.outputBrowseButton.Size = new System.Drawing.Size(75, 23);
 			this.outputBrowseButton.TabIndex = 3;
@@ -290,7 +280,7 @@ namespace FlagPFPGUI
 			// 
 			// outputBox
 			// 
-			this.outputBox.Location = new System.Drawing.Point(99, 74);
+			this.outputBox.Location = new System.Drawing.Point(99, 51);
 			this.outputBox.Name = "outputBox";
 			this.outputBox.Size = new System.Drawing.Size(499, 23);
 			this.outputBox.TabIndex = 2;
@@ -298,7 +288,7 @@ namespace FlagPFPGUI
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(6, 190);
+			this.label8.Location = new System.Drawing.Point(6, 168);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(87, 15);
 			this.label8.TabIndex = 10;
@@ -308,7 +298,7 @@ namespace FlagPFPGUI
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(20, 163);
+			this.label5.Location = new System.Drawing.Point(20, 140);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(73, 15);
 			this.label5.TabIndex = 10;
@@ -318,7 +308,7 @@ namespace FlagPFPGUI
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(12, 134);
+			this.label4.Location = new System.Drawing.Point(12, 111);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(81, 15);
 			this.label4.TabIndex = 8;
@@ -329,7 +319,7 @@ namespace FlagPFPGUI
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(24, 105);
+			this.label3.Location = new System.Drawing.Point(24, 82);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(69, 15);
 			this.label3.TabIndex = 6;
@@ -363,7 +353,6 @@ namespace FlagPFPGUI
 			this.inputBox.Name = "inputBox";
 			this.inputBox.Size = new System.Drawing.Size(499, 23);
 			this.inputBox.TabIndex = 0;
-			this.inputBox.TextChanged += new System.EventHandler(this.inputBox_TextChanged);
 			// 
 			// aboutButton
 			// 
@@ -463,11 +452,23 @@ namespace FlagPFPGUI
 			this.showAfterwardsCheckbox.Text = "Show in explorer afterwards";
 			this.showAfterwardsCheckbox.UseVisualStyleBackColor = true;
 			// 
+			// button1
+			// 
+			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.button1.Location = new System.Drawing.Point(580, 437);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.TabIndex = 16;
+			this.button1.Text = "Create Flag";
+			this.button1.UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1115, 472);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.showAfterwardsCheckbox);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.previewPicture);
@@ -520,7 +521,6 @@ namespace FlagPFPGUI
         private System.Windows.Forms.Button moveUp;
 		private System.Windows.Forms.Button addFlag;
 		private System.Windows.Forms.NumericUpDown marginBox;
-		private System.Windows.Forms.Label inputStatus;
 		private System.Windows.Forms.NumericUpDown insizeBox;
 		private System.Windows.Forms.NumericUpDown fsizeBox;
 		private System.Windows.Forms.CheckBox rotateCheckbox;
@@ -529,6 +529,7 @@ namespace FlagPFPGUI
 		private System.Windows.Forms.CheckBox flipVeriCheckbox;
 		private System.Windows.Forms.ToolTip transTooltip;
 		private System.Windows.Forms.CheckBox showAfterwardsCheckbox;
+		private System.Windows.Forms.Button button1;
 	}
 }
 

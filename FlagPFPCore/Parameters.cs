@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FlagPFPGUI.FlagPFPCore
+namespace FlagPFPCore.Loading
 {
 	public class FlagParameters
 	{

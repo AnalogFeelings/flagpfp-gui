@@ -52,7 +52,7 @@ namespace FlagPFPGUI
 			return true;
 		}
 
-		public bool CheckMarginBox(int margin)
+		public bool CheckMarginBox()
 		{
 			if(marginBox.Value < 0)
 			{
@@ -66,13 +66,18 @@ namespace FlagPFPGUI
 			return true;
 		}
 
-		public bool CheckInnerSizeBox(int insize)
+		public bool CheckOutputExtension()
 		{
-			return true;
-		}
+			if (!FlagMaker.IsExtensionValid(outputBox.Text))
+			{
+				MessageBox.Show("Output extension must be JPEG or PNG!", "Error!",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-		public bool CheckFullSizeBox(int fsize)
-		{
+				EnableControls();
+
+				return false;
+			}
+
 			return true;
 		}
 	}

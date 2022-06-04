@@ -1,10 +1,12 @@
-﻿using FlagPFPGUI.FlagPFPCore;
+﻿using FlagPFPCore.Loading;
+using FlagPFPGUI.FlagPFPCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using WebPWrapper;
 
 namespace FlagPFPGUI
 {
@@ -20,6 +22,8 @@ namespace FlagPFPGUI
 
 			if (!CheckInputOutputBox()) return;
 			if (!CheckFlagRows()) return;
+			if (!CheckMarginBox()) return;
+			if (!CheckOutputExtension()) return;
 
 			string FullOutputPath = Path.GetFullPath(outputBox.Text);
 
@@ -79,7 +83,21 @@ namespace FlagPFPGUI
 				return;
 			}
 
-			previewPicture.ImageLocation = FullOutputPath;
+			string Extension = Path.GetExtension(outputBox.Text);
+			switch(Extension)
+			{
+				case ".png":
+				case ".jpeg":
+				case ".jpg":
+					previewPicture.ImageLocation = Path.GetFullPath(outputBox.Text);
+					break;
+				case ".webp":
+					using(WebP WebpLoader = new WebP())
+					{
+						previewPicture.Image = WebpLoader.Load(outputBox.Text);
+					}
+					break;
+			}
 
 			EnableControls();
 		}
@@ -89,13 +107,11 @@ namespace FlagPFPGUI
 			using (OpenFileDialog FileDialog = new OpenFileDialog())
 			{
 				FileDialog.InitialDirectory = "c:\\";
-				FileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg, .jpeg)|*.jpg;.jpeg";
+				FileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg, *.jpeg)|*.jpg;*.jpeg|WEBP files (*.webp)|*.webp|All files (*.*)|*.*";
 
 				if (FileDialog.ShowDialog() == DialogResult.OK)
 				{
 					inputBox.Text = FileDialog.FileName;
-
-					CheckInputFile();
 				}
 			}
 		}
@@ -105,7 +121,7 @@ namespace FlagPFPGUI
 			using (OpenFileDialog FileDialog = new OpenFileDialog())
 			{
 				FileDialog.InitialDirectory = "c:\\";
-				FileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg, .jpeg)|*.jpg;.jpeg";
+				FileDialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpg, *.jpeg)|*.jpg;*.jpeg|WEBP files (*.webp)|*.webp|All files (*.*)|*.*";
 
 				if (FileDialog.ShowDialog() == DialogResult.OK)
 				{
@@ -169,28 +185,6 @@ namespace FlagPFPGUI
 		private void quitButton_Click(object sender, EventArgs e)
 		{
 			Application.Exit();
-		}
-
-		private void inputBox_TextChanged(object sender, EventArgs e)
-		{
-			CheckInputFile();
-		}
-
-		private void CheckInputFile()
-		{
-			if (!File.Exists(inputBox.Text))
-			{
-				inputStatus.Text = "Unable to load file. Check if the path is correct.";
-				return;
-			}
-
-			using (Bitmap Target = (Bitmap)Image.FromFile(inputBox.Text))
-			{
-				InputWidth = Target.Width;
-				InputHeight = Target.Height;
-
-				inputStatus.Text = $"Loaded image with size {InputWidth}x{InputHeight}.";
-			}
 		}
 
 		private void flagsDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)

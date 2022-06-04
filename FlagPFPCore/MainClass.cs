@@ -1,11 +1,11 @@
 ﻿using FlagPFPCore.Exceptions;
 using FlagPFPCore.Loading;
-using FlagPFPCore.Processing;
-using FlagPFPGUI.FlagPFPCore;
+using FlagPFPCore.Processors;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace FlagPFPCore.FlagMaking
 {
@@ -14,73 +14,77 @@ namespace FlagPFPCore.FlagMaking
 		public Dictionary<string, PrideFlag> FlagDictionary;
 		public string FlagsDirectory;
 
+		private List<BaseProcessor> Processors = new List<BaseProcessor>();
+
 		public FlagCoreObject(string flagsDir)
 		{
 			FlagsDirectory = flagsDir;
+
+			Processors = GetChildrenOfType<BaseProcessor>().ToList();
 		}
 
-		public void LoadFlagDefsFromDir(string dir)
+		public void LoadFlagDefsFromDir(string FlagJsonDirectory)
 		{
-			FlagLoader flagLoader = new FlagLoader();
-			FlagDictionary = flagLoader.LoadFlags(dir, FlagsDirectory);
+			FlagLoader FlagLoader = new FlagLoader();
+			FlagDictionary = FlagLoader.LoadFlags(FlagJsonDirectory, FlagsDirectory);
 		}
 
 		public void ExecuteProcessing(FlagParameters Parameters)
 		{
-			BitmapProcessing bitmapProcessor = new BitmapProcessing();
-			bitmapProcessor.SetFullImageSize(Parameters.OutputImageSize);
-
-			List<PrideFlag> chosenFlags = new List<PrideFlag>();
-			foreach (string chosenFlag in Parameters.Flags)
+			//Go through the passed list of pride flags the user wants, check if they are valid, and put the PrideFlag object on a list.
+			List<PrideFlag> ChosenFlags = new List<PrideFlag>();
+			foreach (string PassedFlag in Parameters.Flags)
 			{
-				PrideFlag outputFlag;
-				if (!FlagDictionary.TryGetValue(chosenFlag, out outputFlag))
+				PrideFlag RetrievedFlag;
+
+				if (!FlagDictionary.TryGetValue(PassedFlag, out RetrievedFlag))
 				{
-					throw new InvalidFlagException($"Flag type \"{chosenFlag}\" is invalid.");
+					throw new InvalidFlagException($"Flag type \"{PassedFlag}\" is invalid.");
 				}
-				chosenFlags.Add(outputFlag);
+
+				ChosenFlags.Add(RetrievedFlag);
 			}
 
-			Bitmap inputBmp = bitmapProcessor.LoadAndResizeBmp(Parameters.InputImagePath, Parameters.OutputImageSize, Parameters.OutputImageSize);
-			Bitmap primaryFlagBmp = bitmapProcessor.LoadAndResizeBmp(Path.Combine(FlagsDirectory, chosenFlags[0].FlagFile),
-																Parameters.OutputImageSize, Parameters.OutputImageSize);
+			string InputExtension = Path.GetExtension(Parameters.InputImagePath);
 
-			Bitmap transformedPrimaryFlagBmp = bitmapProcessor.ProcessFlagTransformation(ref primaryFlagBmp, Parameters.RotateFlag90,
-				Parameters.FlipFlagHorizontally, Parameters.FlipFlagVertically);
-
-			Bitmap croppedPrimaryFlagBmp = bitmapProcessor.CropFlag(ref transformedPrimaryFlagBmp, Parameters.RingPixelMargin);
-			// Place primary flag now.
-			Bitmap finalBmp = bitmapProcessor.StitchTogether(ref croppedPrimaryFlagBmp, ref inputBmp, Parameters.InnerImageSize);
-			chosenFlags.RemoveAt(0);
-
-			int segmentWidth = finalBmp.Width / Parameters.Flags.Count;
-			int currentWidth = segmentWidth;
-			foreach (PrideFlag prideFlag in chosenFlags)
+			foreach(BaseProcessor Processor in Processors)
 			{
-				Bitmap secondaryFlagBmp = bitmapProcessor.LoadAndResizeBmp(Path.Combine(FlagsDirectory, prideFlag.FlagFile),
-																			Parameters.OutputImageSize, Parameters.OutputImageSize);
-				Bitmap transformedSecondaryFlagBmp = bitmapProcessor.ProcessFlagTransformation(ref secondaryFlagBmp, Parameters.RotateFlag90,
-					Parameters.FlipFlagHorizontally, Parameters.FlipFlagVertically);
+				if(Processor.ValidExtensions.Contains(InputExtension))
+				{
+					Processor.ExecuteProcessing(Parameters, FlagsDirectory, ref ChosenFlags);
+					break;
+				}
+			}
+		}
 
-				Bitmap croppedSecondaryFlagBmp = bitmapProcessor.CropFlag(ref transformedSecondaryFlagBmp, Parameters.RingPixelMargin);
-				croppedSecondaryFlagBmp = bitmapProcessor.ProcessSecondaryFlag(ref croppedSecondaryFlagBmp, currentWidth);
+		public bool IsExtensionValid(string Filename)
+		{
+			string Extension = Path.GetExtension(Filename);
+			bool Found = false;
 
-				finalBmp = bitmapProcessor.StitchTogether(ref croppedSecondaryFlagBmp, ref finalBmp, Parameters.OutputImageSize);
-
-				currentWidth += segmentWidth;
-
-				secondaryFlagBmp.Dispose();
-				transformedSecondaryFlagBmp.Dispose();
-				croppedSecondaryFlagBmp.Dispose();
+			foreach (BaseProcessor Processor in Processors)
+			{
+				if (Processor.ValidExtensions.Contains(Extension))
+				{
+					Found = true;
+					break;
+				}
 			}
 
-			finalBmp.Save(Parameters.OutputImagePath, ImageFormat.Png);
+			return Found;
+		}
 
-			inputBmp.Dispose();
-			primaryFlagBmp.Dispose();
-			transformedPrimaryFlagBmp.Dispose();
-			croppedPrimaryFlagBmp.Dispose();
-			finalBmp.Dispose();
+		private IEnumerable<T> GetChildrenOfType<T>() where T : class
+		{
+			List<T> FoundClasses = new List<T>();
+
+			foreach (Type Type in Assembly.GetAssembly(typeof(T)).GetTypes()
+				.Where(ClassType => ClassType.IsClass && !ClassType.IsAbstract && ClassType.IsSubclassOf(typeof(T))))
+			{
+				FoundClasses.Add((T)Activator.CreateInstance(Type));
+			}
+
+			return FoundClasses;
 		}
 	}
 }
