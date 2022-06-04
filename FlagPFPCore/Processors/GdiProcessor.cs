@@ -14,12 +14,14 @@ namespace FlagPFPGUI.FlagPFPCore.Processors
 		{
 			get
 			{
-				return new List<string>
-				{
-					".png",
-					".jpg",
-					".jpeg"
-				};
+				if(ValidExtensions == null) ValidExtensions = new List<string>
+											{
+												".png",
+												".jpg",
+												".jpeg"
+											};
+
+				return ValidExtensions;
 			}
 		}
 
@@ -120,7 +122,7 @@ namespace FlagPFPGUI.FlagPFPCore.Processors
 			return null;
 		}
 
-		public override Bitmap LoadAndResizeImage(string Filename, int Width, int Height)
+		protected override Bitmap LoadAndResizeImage(string Filename, int Width, int Height)
 		{
 			Bitmap Source = (Bitmap)Image.FromFile(Filename);
 			Bitmap Result = new Bitmap(Width, Height);
@@ -136,7 +138,7 @@ namespace FlagPFPGUI.FlagPFPCore.Processors
 			return Result;
 		}
 
-		public override Bitmap CropFlag(ref Bitmap Flag, int RingMargin)
+		protected override Bitmap CropFlag(ref Bitmap Flag, int RingMargin)
 		{
 			Bitmap Result = (Bitmap)Flag.Clone();
 
@@ -155,7 +157,7 @@ namespace FlagPFPGUI.FlagPFPCore.Processors
 			return Result;
 		}
 
-		public override Bitmap ProcessSecondaryFlag(ref Bitmap Flag, int Substract)
+		protected override Bitmap ProcessSecondaryFlag(ref Bitmap Flag, int Substract)
 		{
 			using (Graphics Graphics = Graphics.FromImage(Flag))
 			{
@@ -166,7 +168,7 @@ namespace FlagPFPGUI.FlagPFPCore.Processors
 			return Flag;
 		}
 
-		public override Bitmap ProcessFlagTransformation(ref Bitmap Flag, bool Rotate90, bool FlipHorizontally, bool FlipVertically)
+		protected override Bitmap ProcessFlagTransformation(ref Bitmap Flag, bool Rotate90, bool FlipHorizontally, bool FlipVertically)
 		{
 			Bitmap Result = (Bitmap)Flag.Clone();
 
@@ -177,7 +179,7 @@ namespace FlagPFPGUI.FlagPFPCore.Processors
 			return Result;
 		}
 
-		public override Bitmap StitchTogether(ref Bitmap Flag, ref Bitmap Picture, int PictureSize)
+		protected override Bitmap StitchTogether(ref Bitmap Flag, ref Bitmap Picture, int PictureSize)
 		{
 			Bitmap Result = new Bitmap(FinalImageSize, FinalImageSize);
 
