@@ -76,7 +76,7 @@ namespace FlagPFPCore.FlagMaking
 			return InputProcessor.ExecuteProcessing(Parameters, FlagImageDirectory, ref ChosenFlags);
 		}
 
-		public void ExportBitmap(ref Bitmap Picture, string Filename)
+		public Bitmap ExportBitmap(ref Bitmap Picture, string Filename)
 		{
 			string OutputExtension = Path.GetExtension(Filename);
 
@@ -93,9 +93,9 @@ namespace FlagPFPCore.FlagMaking
 
 			if (OutputProcessor == null) throw new NoProcessorFoundException($"No output processor for extension \"{OutputExtension}\" found.");
 
-			OutputProcessor.ExportBitmap(ref Picture, Filename);
+			Bitmap Result = OutputProcessor.ExportBitmap(ref Picture, Filename);
 
-			Picture.Dispose();
+			return Result;
 		}
 
 		public bool IsExtensionValid(string Filename)

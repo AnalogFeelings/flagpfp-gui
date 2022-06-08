@@ -12,7 +12,7 @@ namespace FlagPFPCore.Processors
 		protected int FinalImageSize = 0;
 
 		public abstract Bitmap ExecuteProcessing(FlagParameters Parameters, string FlagsDir, ref List<PrideFlag> Flags);
-		public abstract void ExportBitmap(ref Bitmap Picture, string Filename);
+		public abstract Bitmap ExportBitmap(ref Bitmap Picture, string Filename);
 
 		protected abstract Bitmap StitchTogether(ref Bitmap Flag, ref Bitmap Picture, int PictureSize);
 		protected abstract Bitmap LoadAndResizeImage(string Filename, int Width, int Height);

@@ -1,5 +1,4 @@
-﻿using FlagPFPCore.Exceptions;
-using FlagPFPCore.Loading;
+﻿using FlagPFPCore.Loading;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -87,7 +86,7 @@ namespace FlagPFPCore.Processors
 			return FinalOutputBitmap;
 		}
 
-		public override void ExportBitmap(ref Bitmap Picture, string Filename)
+		public override Bitmap ExportBitmap(ref Bitmap Picture, string Filename)
 		{
 			string Format = Path.GetExtension(Filename);
 			switch (Format)
@@ -108,7 +107,7 @@ namespace FlagPFPCore.Processors
 					break;
 			}
 
-			Picture.Dispose();
+			return Picture;
 		}
 
 		private ImageCodecInfo GetEncoder(ImageFormat Format)

@@ -59,9 +59,11 @@ namespace FlagPFPGUI
 				};
 
 				Bitmap ProcessedImage = FlagMaker.ExecuteProcessing(Parameters);
-				previewPicture.Image = (Image)ProcessedImage.Clone();
 
-				FlagMaker.ExportBitmap(ref ProcessedImage, Parameters.OutputImagePath);
+				Bitmap ExportedImage = FlagMaker.ExportBitmap(ref ProcessedImage, Parameters.OutputImagePath);
+				previewPicture.Image = new Bitmap(ExportedImage);
+
+				ExportedImage.Dispose();
 
 				if (showAfterwardsCheckbox.Checked)
 				{

@@ -84,14 +84,14 @@ namespace FlagPFPCore.Processors
 			return FinalOutputBitmap;
 		}
 
-		public override void ExportBitmap(ref Bitmap Picture, string Filename)
+		public override Bitmap ExportBitmap(ref Bitmap Picture, string Filename)
 		{
 			using (WebP WebpExporter = new WebP())
 			{
 				WebpExporter.Save(Picture, Filename, 100);
 			}
 
-			Picture.Dispose();
+			return Picture;
 		}
 
 		protected override Bitmap LoadAndResizeImage(string Filename, int Width, int Height)
