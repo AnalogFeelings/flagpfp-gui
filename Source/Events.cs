@@ -67,6 +67,7 @@ namespace FlagPFPGUI
 
 				if (showAfterwardsCheckbox.Checked)
 				{
+					//explorer.exe /select,"path"
 					string arguments = string.Format("/select,\"{0}\"", FullOutputPath);
 
 					Process.Start("explorer.exe", arguments);
