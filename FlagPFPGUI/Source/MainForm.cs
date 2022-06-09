@@ -18,7 +18,7 @@ namespace FlagPFPGUI
 		private BindingSource GridSource;
 		private DataGridViewComboBoxColumn ComboColumn;
 
-		private const string RELEASES_URL = "https://api.github.com/repos/AestheticalZ/cbre-ex/releases/latest";
+		private const string RELEASES_URL = "https://api.github.com/repos/AestheticalZ/flagpfp-gui/releases/latest";
 
 		public MainForm()
 		{

@@ -137,8 +137,8 @@
     <Content Include="Flag JSONs\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="flagpfp.ico" />
     <None Include="flagpfp.png" />
+    <Content Include="flagpfp.ico" />
     <Content Include="Flags\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
