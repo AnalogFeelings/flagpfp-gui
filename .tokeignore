@@ -1,0 +1,9 @@
+*.sln
+*.csproj
+*.config
+*.json
+*.resx
+*.settings
+*.Designer.cs
+*.md
+*.manifest
