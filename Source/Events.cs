@@ -183,15 +183,5 @@ namespace FlagPFPGUI
 
 			if (EditingControl != null) EditingControl.DroppedDown = true;
 		}
-
-		private void upAndDown_Leave(object sender, EventArgs e)
-		{
-			NumericUpDown Target = sender as NumericUpDown;
-
-			if (Target.Text == string.Empty)
-			{
-				Target.Text = "0";
-			}
-		}
 	}
 }

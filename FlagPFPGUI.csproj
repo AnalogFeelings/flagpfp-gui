@@ -105,6 +105,9 @@
     <Compile Include="Source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\FlagPFPCore\WebPWrapper.cs" />
+    <Compile Include="Source\UnitedNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="Source\FlagCreatorForm.resx">
       <DependentUpon>FlagCreatorForm.cs</DependentUpon>
     </EmbeddedResource>
