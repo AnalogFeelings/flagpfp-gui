@@ -4,6 +4,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/aestheticalz/flagpfp-gui?label=Stars&style=flat-square)
 ![GitHub License](https://img.shields.io/github/license/aestheticalz/flagpfp-gui?label=License&style=flat-square)
 ![GitHub Issues](https://img.shields.io/github/issues/aestheticalz/flagpfp-gui?label=Issues&style=flat-square)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/aestheticalz/flagpfp-gui?label=Pull%20Requests&style=flat-square)
 
 GUI frontend for [FlagPFP](https://github.com/AestheticalZ/FlagPFP), with [FlagPFP.Core](https://github.com/AestheticalZ/FlagPFPCore) integrated.
 
