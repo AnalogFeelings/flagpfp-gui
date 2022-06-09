@@ -19,4 +19,5 @@ Open the .sln file in VS2022 and select Debug or Release, then build it.
 ⚠️ **WARNING** ⚠️ :: Needs libwebp named as "libwebp_x64.dll" in the same directory as the executable. Get libwebp [here](https://github.com/webmproject/libwebp).
 
 # Program Screenshot
-![example](picreadme.png)
+![Main Window](ReadmePic1.png)
+![Flag Creator](ReadmePic2.png)
