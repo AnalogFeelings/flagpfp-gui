@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32519.111
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagPFPGUI", "FlagPFPGUI.csproj", "{E3DC0901-63DE-48C4-9863-72BA8DB6F661}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagPFPGUI", "FlagPFPGUI\FlagPFPGUI.csproj", "{E3DC0901-63DE-48C4-9863-72BA8DB6F661}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlagPFPGUI.Updater", "FlagPFPGUI.Updater\FlagPFPGUI.Updater.csproj", "{D8780180-C077-4311-810E-8BA90E7393ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,9 @@ Global
 		{E3DC0901-63DE-48C4-9863-72BA8DB6F661}.Debug|x64.Build.0 = Debug|x64
 		{E3DC0901-63DE-48C4-9863-72BA8DB6F661}.Release|x64.ActiveCfg = Release|x64
 		{E3DC0901-63DE-48C4-9863-72BA8DB6F661}.Release|x64.Build.0 = Release|x64
+		{D8780180-C077-4311-810E-8BA90E7393ED}.Debug|x64.ActiveCfg = Debug|x64
+		{D8780180-C077-4311-810E-8BA90E7393ED}.Debug|x64.Build.0 = Debug|x64
+		{D8780180-C077-4311-810E-8BA90E7393ED}.Release|x64.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

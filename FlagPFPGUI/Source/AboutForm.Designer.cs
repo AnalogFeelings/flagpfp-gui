@@ -105,7 +105,7 @@ namespace FlagPFPGUI
 			// pictureBox1
 			// 
 			this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.pictureBox1.Image = global::FlagPFPGUI.Properties.Resources.logo;
+			this.pictureBox1.Image = global::FlagPFPGUI.Properties.Resources.flagpfp;
 			this.pictureBox1.Location = new System.Drawing.Point(12, 12);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(256, 256);

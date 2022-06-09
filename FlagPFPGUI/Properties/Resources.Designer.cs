@@ -63,9 +63,9 @@ namespace FlagPFPGUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logo {
+        internal static System.Drawing.Bitmap flagpfp {
             get {
-                object obj = ResourceManager.GetObject("logo", resourceCulture);
+                object obj = ResourceManager.GetObject("flagpfp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
