@@ -55,7 +55,7 @@ namespace FlagPFPGUI.Updater
 				Log($"Extracting {PackageFilename.Pastel(Color.LimeGreen)} to Temp directory...", LogSeverity.MESSAGE);
 				if (Directory.Exists("Temp")) Directory.Delete("Temp", true);
 
-				ZipFile.ExtractToDirectory("Update.zip", "Temp");
+				ZipFile.ExtractToDirectory(PackageFilename, "Temp");
 
 				DirectoryInfo TempDir = new DirectoryInfo("Temp");
 				DirectoryInfo[] TempSubdirs = TempDir.GetDirectories();

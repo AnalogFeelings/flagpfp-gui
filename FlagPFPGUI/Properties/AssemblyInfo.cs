@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FlagPFPGUI")]
+[assembly: AssemblyTitle("FlagPFP-GUI")]
 [assembly: AssemblyDescription("A neat little GUI frontend for FlagPFP.Core written in Windows Forms.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("AestheticalZ")]
-[assembly: AssemblyProduct("FlagPFPGUI")]
-[assembly: AssemblyCopyright("Copyright © AestheticalZ  2021")]
+[assembly: AssemblyProduct("FlagPFP-GUI")]
+[assembly: AssemblyCopyright("Copyright © AestheticalZ  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

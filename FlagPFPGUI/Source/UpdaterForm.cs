@@ -106,8 +106,11 @@ namespace FlagPFPGUI
                 this.downloadProgress.Value = 0;
                 statusLabel.Text = "Status: Idle";
 
-                MessageBox.Show("An error has ocurred while downloading and verifying the update package.\n" +
+                MessageBox.Show("An error has ocurred while downloading and verifying the update package:\n\n" +
                                $"{ex.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+				if (File.Exists(PackageAsset.Filename)) File.Delete(PackageAsset.Filename);
+				if (File.Exists(ChecksumAsset.Filename)) File.Delete(ChecksumAsset.Filename);
             }
         }
 

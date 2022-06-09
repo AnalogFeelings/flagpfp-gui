@@ -3,7 +3,9 @@ using FlagPFPCore.FlagMaking;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
@@ -18,7 +20,8 @@ namespace FlagPFPGUI
 		private BindingSource GridSource;
 		private DataGridViewComboBoxColumn ComboColumn;
 
-		private const string RELEASES_URL = "https://api.github.com/repos/AestheticalZ/flagpfp-gui/releases/latest";
+		private const string API_RELEASES_URL = "https://api.github.com/repos/AestheticalZ/flagpfp-gui/releases/latest";
+		private const string GIT_LATEST_RELEASE_URL = "https://github.com/AestheticalZ/flagpfp-gui/releases/latest";
 
 		public MainForm()
 		{
@@ -72,6 +75,7 @@ namespace FlagPFPGUI
 					Version ParsedNewVersion;
 					Version CurrentVersion = Assembly.GetAssembly(typeof(MainForm)).GetName().Version;
 
+					//Github wants me to set a user agent, sure!
 					Client.Headers.Add("Accept", "application/vnd.github.v3+json");
 					Client.Headers.Add("User-Agent", "AestheticalZ/flagpfp-gui");
 
@@ -80,19 +84,28 @@ namespace FlagPFPGUI
 						MissingMemberHandling = MissingMemberHandling.Ignore
 					};
 
-					UpdaterResponse Response = JsonConvert.DeserializeObject<UpdaterResponse>(Client.DownloadString(RELEASES_URL), DeserializeSettings);
+					UpdaterResponse Response = JsonConvert.DeserializeObject<UpdaterResponse>(Client.DownloadString(API_RELEASES_URL), DeserializeSettings);
 
+					//Version is invalid? Die
 					if (!Version.TryParse(Response.VersionTag, out ParsedNewVersion)) return;
-					if (Response.Assets.Count < 2) return;
 
-					ReleaseAsset PackageAsset = Response.Assets[0];
-					ReleaseAsset ChecksumAsset = Response.Assets[1];
-
-					if (!PackageAsset.Filename.EndsWith(".zip")) return;
-					if (!ChecksumAsset.Filename.EndsWith(".txt")) return;
+					ReleaseAsset PackageAsset = Response.Assets.FirstOrDefault(x => x.Filename.EndsWith(".zip"));
+					ReleaseAsset ChecksumAsset = Response.Assets.FirstOrDefault(x => x.Filename.EndsWith(".md5"));
 
 					if (ParsedNewVersion > CurrentVersion)
 					{
+						//Missing required files? The update must have changed the structure!
+						if (PackageAsset == default(ReleaseAsset) || PackageAsset == null || ChecksumAsset == default(ReleaseAsset) || ChecksumAsset == null)
+						{
+							DialogResult Result = MessageBox.Show("The updater found an update, but it could not find the necessary files, meaning that the updater may have been updated.\n\n" +
+																"The updater is not designed to update itself, so you must download and update FlagPFP-GUI yourself.\n\n" +
+																"Do you want to go to the latest GitHub release?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+							if (Result == DialogResult.Yes) Process.Start(GIT_LATEST_RELEASE_URL);
+
+							return;
+						}
+
 						UpdaterForm Form = new UpdaterForm(ParsedNewVersion, Response.Description, PackageAsset, ChecksumAsset);
 						Form.Show();
 					}

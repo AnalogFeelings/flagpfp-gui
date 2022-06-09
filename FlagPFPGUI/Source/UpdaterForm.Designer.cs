@@ -64,7 +64,7 @@
 			// 
 			this.noButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.noButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.noButton.Location = new System.Drawing.Point(311, 245);
+			this.noButton.Location = new System.Drawing.Point(311, 251);
 			this.noButton.Name = "noButton";
 			this.noButton.Size = new System.Drawing.Size(75, 23);
 			this.noButton.TabIndex = 2;
@@ -76,7 +76,7 @@
 			// 
 			this.yesButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.yesButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.yesButton.Location = new System.Drawing.Point(230, 245);
+			this.yesButton.Location = new System.Drawing.Point(230, 251);
 			this.yesButton.Name = "yesButton";
 			this.yesButton.Size = new System.Drawing.Size(75, 23);
 			this.yesButton.TabIndex = 3;
@@ -119,7 +119,7 @@
 			this.statusLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.statusLabel.Location = new System.Drawing.Point(9, 228);
 			this.statusLabel.Name = "statusLabel";
-			this.statusLabel.Size = new System.Drawing.Size(377, 14);
+			this.statusLabel.Size = new System.Drawing.Size(377, 20);
 			this.statusLabel.TabIndex = 7;
 			this.statusLabel.Text = "Status: Idle";
 			this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -128,7 +128,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(398, 280);
+			this.ClientSize = new System.Drawing.Size(398, 286);
 			this.Controls.Add(this.statusLabel);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.downloadProgress);
