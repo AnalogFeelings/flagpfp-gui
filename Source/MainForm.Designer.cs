@@ -32,6 +32,9 @@ namespace FlagPFPGUI
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.marginBox = new FlagPFPGUI.Source.UnitedNumericUpDown();
+			this.fsizeBox = new FlagPFPGUI.Source.UnitedNumericUpDown();
+			this.insizeBox = new FlagPFPGUI.Source.UnitedNumericUpDown();
 			this.flipVeriCheckbox = new System.Windows.Forms.CheckBox();
 			this.flipHoriCheckbox = new System.Windows.Forms.CheckBox();
 			this.rotateCheckbox = new System.Windows.Forms.CheckBox();
@@ -67,10 +70,10 @@ namespace FlagPFPGUI
 			this.CreateFlagButton = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
-			this.marginBox = new FlagPFPGUI.Source.UnitedNumericUpDown();
-			this.fsizeBox = new FlagPFPGUI.Source.UnitedNumericUpDown();
-			this.insizeBox = new FlagPFPGUI.Source.UnitedNumericUpDown();
 			this.groupBox2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.marginBox)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.fsizeBox)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.insizeBox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.flagsDataGrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.previewPicture)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -78,9 +81,6 @@ namespace FlagPFPGUI
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.Panel2.SuspendLayout();
 			this.splitContainer.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.marginBox)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.fsizeBox)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.insizeBox)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox2
@@ -118,6 +118,57 @@ namespace FlagPFPGUI
 			this.groupBox2.TabIndex = 1;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Image Parameters";
+			// 
+			// marginBox
+			// 
+			this.marginBox.AddSpace = false;
+			this.marginBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.marginBox.Location = new System.Drawing.Point(99, 80);
+			this.marginBox.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.marginBox.Name = "marginBox";
+			this.marginBox.SetCaretAtEnd = false;
+			this.marginBox.Size = new System.Drawing.Size(631, 23);
+			this.marginBox.TabIndex = 4;
+			this.marginBox.UnitText = "px";
+			// 
+			// fsizeBox
+			// 
+			this.fsizeBox.AddSpace = false;
+			this.fsizeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.fsizeBox.Location = new System.Drawing.Point(99, 138);
+			this.fsizeBox.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.fsizeBox.Name = "fsizeBox";
+			this.fsizeBox.SetCaretAtEnd = false;
+			this.fsizeBox.Size = new System.Drawing.Size(631, 23);
+			this.fsizeBox.TabIndex = 6;
+			this.fsizeBox.UnitText = "px";
+			// 
+			// insizeBox
+			// 
+			this.insizeBox.AddSpace = false;
+			this.insizeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.insizeBox.Location = new System.Drawing.Point(99, 109);
+			this.insizeBox.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.insizeBox.Name = "insizeBox";
+			this.insizeBox.SetCaretAtEnd = false;
+			this.insizeBox.Size = new System.Drawing.Size(631, 23);
+			this.insizeBox.TabIndex = 5;
+			this.insizeBox.UnitText = "px";
 			// 
 			// flipVeriCheckbox
 			// 
@@ -496,57 +547,6 @@ namespace FlagPFPGUI
 			this.splitContainer.SplitterDistance = 450;
 			this.splitContainer.TabIndex = 20;
 			// 
-			// marginBox
-			// 
-			this.marginBox.AddSpace = false;
-			this.marginBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.marginBox.Location = new System.Drawing.Point(99, 80);
-			this.marginBox.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-			this.marginBox.Name = "marginBox";
-			this.marginBox.SetCaretAtEnd = false;
-			this.marginBox.Size = new System.Drawing.Size(631, 23);
-			this.marginBox.TabIndex = 4;
-			this.marginBox.UnitText = "px";
-			// 
-			// fsizeBox
-			// 
-			this.fsizeBox.AddSpace = false;
-			this.fsizeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.fsizeBox.Location = new System.Drawing.Point(99, 138);
-			this.fsizeBox.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-			this.fsizeBox.Name = "fsizeBox";
-			this.fsizeBox.SetCaretAtEnd = false;
-			this.fsizeBox.Size = new System.Drawing.Size(631, 23);
-			this.fsizeBox.TabIndex = 6;
-			this.fsizeBox.UnitText = "px";
-			// 
-			// insizeBox
-			// 
-			this.insizeBox.AddSpace = false;
-			this.insizeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.insizeBox.Location = new System.Drawing.Point(99, 109);
-			this.insizeBox.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-			this.insizeBox.Name = "insizeBox";
-			this.insizeBox.SetCaretAtEnd = false;
-			this.insizeBox.Size = new System.Drawing.Size(631, 23);
-			this.insizeBox.TabIndex = 5;
-			this.insizeBox.UnitText = "px";
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,6 +559,9 @@ namespace FlagPFPGUI
 			this.Text = "FlagPFP GUI v";
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.marginBox)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.fsizeBox)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.insizeBox)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.flagsDataGrid)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.previewPicture)).EndInit();
 			this.groupBox1.ResumeLayout(false);
@@ -567,9 +570,6 @@ namespace FlagPFPGUI
 			this.splitContainer.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
 			this.splitContainer.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.marginBox)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.fsizeBox)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.insizeBox)).EndInit();
 			this.ResumeLayout(false);
 
         }

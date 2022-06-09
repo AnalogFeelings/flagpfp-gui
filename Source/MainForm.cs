@@ -71,24 +71,32 @@ namespace FlagPFPGUI
 
 		public void DisableControls()
 		{
+			generateButton.Enabled = false;
 			inputBox.Enabled = false;
 			inputBrowseButton.Enabled = false;
 			flagsDataGrid.Enabled = false;
 			marginBox.Enabled = false;
 			insizeBox.Enabled = false;
 			fsizeBox.Enabled = false;
+			rotateCheckbox.Enabled = false;
+			flipHoriCheckbox.Enabled = false;
+			flipVeriCheckbox.Enabled = false;
 			outputBox.Enabled = false;
 			outputBrowseButton.Enabled = false;
 		}
 
 		public void EnableControls()
 		{
+			generateButton.Enabled = true;
 			inputBox.Enabled = true;
 			inputBrowseButton.Enabled = true;
 			flagsDataGrid.Enabled = true;
 			marginBox.Enabled = true;
 			insizeBox.Enabled = true;
 			fsizeBox.Enabled = true;
+			rotateCheckbox.Enabled = true;
+			flipHoriCheckbox.Enabled = true;
+			flipVeriCheckbox.Enabled = true;
 			outputBox.Enabled = true;
 			outputBrowseButton.Enabled = true;
 		}
