@@ -174,7 +174,12 @@ namespace FlagPFPGUI
 
 		private void quitButton_Click(object sender, EventArgs e)
 		{
-			Application.Exit();
+			DialogResult Result = MessageBox.Show("Are you sure you want to quit?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+			if(Result == DialogResult.Yes)
+			{
+				Application.Exit();
+			}
 		}
 
 		private void flagsDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
