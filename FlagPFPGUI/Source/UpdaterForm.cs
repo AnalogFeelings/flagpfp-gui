@@ -72,16 +72,16 @@ namespace FlagPFPGUI
 
                     statusLabel.Text = "Status: Verifying...";
 
-                    using (MD5 md5 = MD5.Create())
+                    using (MD5 Hasher = MD5.Create())
                     {
-                        using (FileStream stream = File.OpenRead(PackageAsset.Filename))
+                        using (FileStream Stream = File.OpenRead(PackageAsset.Filename))
                         {
-                            string convertedChecksum;
+                            string ConvertedChecksum;
 
-                            byte[] hash = md5.ComputeHash(stream);
-                            convertedChecksum = BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                            byte[] Md5Hash = Hasher.ComputeHash(Stream);
+                            ConvertedChecksum = BitConverter.ToString(Md5Hash).Replace("-", "").ToLowerInvariant();
 
-                            if (DownloadedChecksum != convertedChecksum) throw new Exception("Verification failed. Update package is probably corrupted.");
+                            if (DownloadedChecksum != ConvertedChecksum) throw new Exception("Verification failed. Update package is most probably corrupted.");
                         }
                     }
 
