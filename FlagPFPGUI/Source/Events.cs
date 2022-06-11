@@ -188,5 +188,30 @@ namespace FlagPFPGUI
 
 			if (EditingControl != null) EditingControl.DroppedDown = true;
 		}
+
+		private void backgroundModeCheckbox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (backgroundModeCheckbox.Checked)
+			{
+				marginBox.Enabled = false;
+				pickColorButton.Enabled = true;
+			}
+			else
+			{
+				marginBox.Enabled = true;
+				pickColorButton.Enabled = false;
+			}
+		}
+
+		private void splitContainer_Paint(object sender, PaintEventArgs e)
+		{
+			SplitContainer Target = sender as SplitContainer;
+
+			Rectangle Copy = Target.SplitterRectangle;
+			Copy.X += 3;
+			Copy.Width = 2;
+
+			e.Graphics.FillRectangle(SystemBrushes.ControlLight, Copy);
+		}
 	}
 }

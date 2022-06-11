@@ -56,7 +56,8 @@ namespace FlagPFPGUI
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(304, 144);
 			this.label2.TabIndex = 2;
-			this.label2.Text = "A neat little GUI frontend for FlagPFP.Core written in Windows Forms.\r\n";
+			this.label2.Text = "A neat little GUI frontend for FlagPFP.Core written in Windows Forms.\r\n\r\nThanks t" +
+    "o any current and future contributors! I really appreciate your work.\r\n";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// githubLink

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -23,11 +24,33 @@ namespace FlagPFPGUI
 		private const string API_RELEASES_URL = "https://api.github.com/repos/AestheticalZ/flagpfp-gui/releases/latest";
 		private const string GIT_LATEST_RELEASE_URL = "https://github.com/AestheticalZ/flagpfp-gui/releases/latest";
 
+		private readonly Random Random = new Random();
+		private readonly string[] CUTE_PHRASES = 
+		{
+			"Trans rights!",
+			"Pan-tasticly cool!",
+			"Bi-kes on trans-it!",
+			"Don't let anyone tell you which gender to love!",
+			"Ace-ing being cool!",
+			"Pan-cakes for breakfast!",
+			"Trans-parently awesome!",
+			"Now with a nice aro-ma of flowers!",
+			"Most people are binary, but you are allowed to not be!",
+			"Remember, pan and bi are not the same thing!",
+			"Queer and proud!",
+			"Bigots, stay at least 50 meters away from us!",
+			"Trans people are so cool...",
+			"Legalize same-sex marriage everywhere!"
+		};
+
 		public MainForm()
 		{
 			InitializeComponent();
 
 			this.Text += Assembly.GetAssembly(typeof(MainForm)).GetName().Version.ToString(2);
+
+			int ChosenPhrase = Random.Next(0, CUTE_PHRASES.Length);
+			this.Text += " - " + CUTE_PHRASES[ChosenPhrase];
 
 			try
 			{
@@ -132,33 +155,67 @@ namespace FlagPFPGUI
 		public void DisableControls()
 		{
 			generateButton.Enabled = false;
+
 			inputBox.Enabled = false;
 			inputBrowseButton.Enabled = false;
-			flagsDataGrid.Enabled = false;
+
+			outputBox.Enabled = false;
+			outputBrowseButton.Enabled = false;
+
 			marginBox.Enabled = false;
 			insizeBox.Enabled = false;
 			fsizeBox.Enabled = false;
+
 			rotateCheckbox.Enabled = false;
 			flipHoriCheckbox.Enabled = false;
 			flipVeriCheckbox.Enabled = false;
-			outputBox.Enabled = false;
-			outputBrowseButton.Enabled = false;
+
+			backgroundModeCheckbox.AutoCheck = false;
+			pickColorButton.Enabled = false;
+
+			flagsDataGrid.Enabled = false;
+			moveDown.Enabled = false;
+			moveUp.Enabled = false;
+			addFlag.Enabled = false;
+			addFlag.Enabled = false;
+
+			showAfterwardsCheckbox.Enabled = false;
+			CreateFlagButton.Enabled = false;
 		}
 
 		public void EnableControls()
 		{
 			generateButton.Enabled = true;
+
 			inputBox.Enabled = true;
 			inputBrowseButton.Enabled = true;
-			flagsDataGrid.Enabled = true;
-			marginBox.Enabled = true;
+
+			outputBox.Enabled = true;
+			outputBrowseButton.Enabled = true;
+
 			insizeBox.Enabled = true;
 			fsizeBox.Enabled = true;
+
 			rotateCheckbox.Enabled = true;
 			flipHoriCheckbox.Enabled = true;
 			flipVeriCheckbox.Enabled = true;
-			outputBox.Enabled = true;
-			outputBrowseButton.Enabled = true;
+
+			if (backgroundModeCheckbox.Checked)
+			{
+				pickColorButton.Enabled = true;
+			}
+			else marginBox.Enabled = true;
+
+			backgroundModeCheckbox.AutoCheck = true;
+
+			flagsDataGrid.Enabled = true;
+			moveDown.Enabled = true;
+			moveUp.Enabled = true;
+			addFlag.Enabled = true;
+			addFlag.Enabled = true;
+
+			showAfterwardsCheckbox.Enabled = true;
+			CreateFlagButton.Enabled = true;
 		}
 	}
 }
