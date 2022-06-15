@@ -176,7 +176,7 @@ namespace FlagPFPGUI
 		{
 			DialogResult Result = MessageBox.Show("Are you sure you want to quit?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-			if(Result == DialogResult.Yes)
+			if (Result == DialogResult.Yes)
 			{
 				Application.Exit();
 			}

@@ -27,7 +27,7 @@ namespace FlagPFPCore.FlagMaking
 
 			foreach (BaseProcessor Processor in Processors)
 			{
-				foreach(string Extension in Processor.ValidInputExtensions)
+				foreach (string Extension in Processor.ValidInputExtensions)
 				{
 					if (!ValidExtensions.Contains(Extension)) ValidExtensions.Add(Extension);
 				}
@@ -62,7 +62,7 @@ namespace FlagPFPCore.FlagMaking
 
 			BaseProcessor InputProcessor = null;
 
-			foreach(BaseProcessor Processor in Processors)
+			foreach (BaseProcessor Processor in Processors)
 			{
 				if (Processor.ValidInputExtensions.Contains(InputExtension))
 				{

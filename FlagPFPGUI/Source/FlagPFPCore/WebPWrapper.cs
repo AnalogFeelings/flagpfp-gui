@@ -74,9 +74,9 @@ namespace WebPWrapper
                 int outputSize = bmpData.Stride * imgHeight;
                 IntPtr ptrData = pinnedWebP.AddrOfPinnedObject();
                 if (bmp.PixelFormat == PixelFormat.Format24bppRgb)
-                     UnsafeNativeMethods.WebPDecodeBGRInto(ptrData, rawWebP.Length, bmpData.Scan0, outputSize, bmpData.Stride);
+                    UnsafeNativeMethods.WebPDecodeBGRInto(ptrData, rawWebP.Length, bmpData.Scan0, outputSize, bmpData.Stride);
                 else
-                     UnsafeNativeMethods.WebPDecodeBGRAInto(ptrData, rawWebP.Length, bmpData.Scan0, outputSize, bmpData.Stride);
+                    UnsafeNativeMethods.WebPDecodeBGRAInto(ptrData, rawWebP.Length, bmpData.Scan0, outputSize, bmpData.Stride);
 
                 return bmp;
             }
@@ -369,7 +369,7 @@ namespace WebPWrapper
             try
             {
                 int size;
-                
+
                 //Get bmp data
                 bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, bmp.PixelFormat);
 
@@ -559,9 +559,9 @@ namespace WebPWrapper
             try
             {
                 uint v = (uint)UnsafeNativeMethods.WebPGetDecoderVersion();
-                var revision = v % 256;
-                var minor = (v >> 8) % 256;
-                var major = (v >> 16) % 256;
+                uint revision = v % 256;
+                uint minor = (v >> 8) % 256;
+                uint major = (v >> 16) % 256;
                 return major + "." + minor + "." + revision;
             }
             catch (Exception ex) { throw new Exception(ex.Message + "\r\nIn WebP.GetVersion"); }
@@ -1187,7 +1187,7 @@ namespace WebPWrapper
             {
                 case 4:
                     if (WebPDecodeBGRAInto_x86(data, (UIntPtr)data_size, output_buffer, output_buffer_size, output_stride) == null)
-                        throw new InvalidOperationException("Can not decode WebP"); 
+                        throw new InvalidOperationException("Can not decode WebP");
                     break;
                 case 8:
                     if (WebPDecodeBGRAInto_x64(data, (UIntPtr)data_size, output_buffer, output_buffer_size, output_stride) == null)

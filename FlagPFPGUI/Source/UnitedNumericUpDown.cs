@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
-using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -67,7 +66,7 @@ namespace FlagPFPGUI.Source
 
 		protected override void UpdateEditText()
 		{
-			if(_UnitText != null && _UnitText != string.Empty)
+			if (_UnitText != null && _UnitText != string.Empty)
 			{
 				string Space = _AddSpace ? " " : string.Empty;
 
@@ -90,11 +89,11 @@ namespace FlagPFPGUI.Source
 				Regex Regex = new Regex($@"[^{_UnitText} ]+");
 				Match Match = Regex.Match(this.Text);
 
-				if(Match.Success)
+				if (Match.Success)
 				{
 					string Text = Match.Value;
 
-					if(!string.IsNullOrEmpty(Text) && Text != "-")
+					if (!string.IsNullOrEmpty(Text) && Text != "-")
 					{
 						if (this.Hexadecimal)
 						{
@@ -113,11 +112,11 @@ namespace FlagPFPGUI.Source
 
 		private decimal ClampValue(decimal Value)
 		{
-			if(Value < this.Minimum)
+			if (Value < this.Minimum)
 			{
 				Value = this.Minimum;
 			}
-			if(Value > this.Maximum)
+			if (Value > this.Maximum)
 			{
 				Value = this.Maximum;
 			}

@@ -32,14 +32,14 @@ namespace FlagPFPGUI
 		{
 			bool Found = false;
 
-			foreach(DataGridViewRow row in flagsDataGrid.Rows)
+			foreach (DataGridViewRow row in flagsDataGrid.Rows)
 			{
 				if (row.Cells[0].FormattedValue.ToString() == string.Empty) continue;
 				Found = true;
 				break;
 			}
 
-			if(!Found)
+			if (!Found)
 			{
 				MessageBox.Show("Provide at least 1 flag!", "Error!",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -54,7 +54,7 @@ namespace FlagPFPGUI
 
 		public bool CheckMarginBox()
 		{
-			if(marginBox.Value < 0)
+			if (marginBox.Value < 0)
 			{
 				MessageBox.Show("Margin must not be smaller than 0", "Error!",
 					MessageBoxButtons.OK, MessageBoxIcon.Error);

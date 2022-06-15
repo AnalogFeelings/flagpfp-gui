@@ -9,115 +9,115 @@ using System.Windows.Forms;
 
 namespace FlagPFPGUI
 {
-    public partial class UpdaterForm : Form
-    {
-        private ReleaseAsset PackageAsset;
-        private ReleaseAsset ChecksumAsset;
-        private string VersionString;
+	public partial class UpdaterForm : Form
+	{
+		private ReleaseAsset PackageAsset;
+		private ReleaseAsset ChecksumAsset;
+		private string VersionString;
 
-        public UpdaterForm(Version Version, string Description, ReleaseAsset PackageAsset, ReleaseAsset ChecksumAsset)
-        {
-            InitializeComponent();
+		public UpdaterForm(Version Version, string Description, ReleaseAsset PackageAsset, ReleaseAsset ChecksumAsset)
+		{
+			InitializeComponent();
 
-            this.PackageAsset = PackageAsset;
-            this.ChecksumAsset = ChecksumAsset;
-            VersionString = Version.ToString(2);
+			this.PackageAsset = PackageAsset;
+			this.ChecksumAsset = ChecksumAsset;
+			VersionString = Version.ToString(2);
 
-            NativeMethods.SHSTOCKICONINFO StockIconInfo = new NativeMethods.SHSTOCKICONINFO();
-            StockIconInfo.cbSize = (UInt32)Marshal.SizeOf(typeof(NativeMethods.SHSTOCKICONINFO));
+			NativeMethods.SHSTOCKICONINFO StockIconInfo = new NativeMethods.SHSTOCKICONINFO();
+			StockIconInfo.cbSize = (UInt32)Marshal.SizeOf(typeof(NativeMethods.SHSTOCKICONINFO));
 			NativeMethods.SHGetStockIconInfo(NativeMethods.SHSTOCKICONID.SIID_INFO, NativeMethods.SHGSI.SHGSI_ICON | NativeMethods.SHGSI.SHGSI_SHELLICONSIZE, ref StockIconInfo);
 
-            systemBitmap.Image = Icon.FromHandle(StockIconInfo.hIcon).ToBitmap();
+			systemBitmap.Image = Icon.FromHandle(StockIconInfo.hIcon).ToBitmap();
 
-            headerLabel.Text = headerLabel.Text.Replace("(version)", VersionString);
+			headerLabel.Text = headerLabel.Text.Replace("(version)", VersionString);
 
-            changelogBox.Text = Description;
-            changelogBox.BackColor = SystemColors.Window;
-        }
+			changelogBox.Text = Description;
+			changelogBox.BackColor = SystemColors.Window;
+		}
 
-        private void noButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+		private void noButton_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 
-        private async void yesButton_Click(object sender, EventArgs e)
-        {
-            string CurrentFilename = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
+		private async void yesButton_Click(object sender, EventArgs e)
+		{
+			string CurrentFilename = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
 
-            this.changelogBox.Select(0, 0);
-            this.ControlBox = false;
-            this.noButton.Enabled = false;
-            this.yesButton.Enabled = false;
+			this.changelogBox.Select(0, 0);
+			this.ControlBox = false;
+			this.noButton.Enabled = false;
+			this.yesButton.Enabled = false;
 
-            try
-            {
-                using (WebClient Client = new WebClient())
-                {
-                    string DownloadedChecksum = string.Empty;
+			try
+			{
+				using (WebClient Client = new WebClient())
+				{
+					string DownloadedChecksum = string.Empty;
 
-                    Client.Headers.Add("User-Agent", "AestheticalZ/flagpfp-gui");
+					Client.Headers.Add("User-Agent", "AestheticalZ/flagpfp-gui");
 
-                    Client.DownloadFile(new Uri(ChecksumAsset.DownloadUrl), ChecksumAsset.Filename);
-                    DownloadedChecksum = File.ReadAllText(ChecksumAsset.Filename);
+					Client.DownloadFile(new Uri(ChecksumAsset.DownloadUrl), ChecksumAsset.Filename);
+					DownloadedChecksum = File.ReadAllText(ChecksumAsset.Filename);
 
-                    if (string.IsNullOrEmpty(DownloadedChecksum)) throw new Exception("The checksum file was empty.");
+					if (string.IsNullOrEmpty(DownloadedChecksum)) throw new Exception("The checksum file was empty.");
 
-                    Client.DownloadProgressChanged += (senderObj, eventArg) =>
-                    {
-                        downloadProgress.Value = eventArg.ProgressPercentage;
-                        statusLabel.Text = $"Status: Downloading {eventArg.ProgressPercentage}%";
-                    };
+					Client.DownloadProgressChanged += (senderObj, eventArg) =>
+					{
+						downloadProgress.Value = eventArg.ProgressPercentage;
+						statusLabel.Text = $"Status: Downloading {eventArg.ProgressPercentage}%";
+					};
 
-                    await Client.DownloadFileTaskAsync(new Uri(PackageAsset.DownloadUrl), PackageAsset.Filename);
+					await Client.DownloadFileTaskAsync(new Uri(PackageAsset.DownloadUrl), PackageAsset.Filename);
 
-                    statusLabel.Text = "Status: Verifying...";
+					statusLabel.Text = "Status: Verifying...";
 
-                    using (MD5 Hasher = MD5.Create())
-                    {
-                        using (FileStream Stream = File.OpenRead(PackageAsset.Filename))
-                        {
-                            string ConvertedChecksum;
+					using (MD5 Hasher = MD5.Create())
+					{
+						using (FileStream Stream = File.OpenRead(PackageAsset.Filename))
+						{
+							string ConvertedChecksum;
 
-                            byte[] Md5Hash = Hasher.ComputeHash(Stream);
-                            ConvertedChecksum = BitConverter.ToString(Md5Hash).Replace("-", "").ToLowerInvariant();
+							byte[] Md5Hash = Hasher.ComputeHash(Stream);
+							ConvertedChecksum = BitConverter.ToString(Md5Hash).Replace("-", "").ToLowerInvariant();
 
-                            if (DownloadedChecksum != ConvertedChecksum) throw new Exception("Verification failed. Update package is most probably corrupted.");
-                        }
-                    }
+							if (DownloadedChecksum != ConvertedChecksum) throw new Exception("Verification failed. Update package is most probably corrupted.");
+						}
+					}
 
-                    ProcessStartInfo updaterProcess = new ProcessStartInfo("FlagPFPGUI.Updater.exe");
+					ProcessStartInfo updaterProcess = new ProcessStartInfo("FlagPFPGUI.Updater.exe");
 					//Arg 0: New version
 					//Arg 1: FlagPFP process name
 					//Arg 2: Checksum filename
 					//Arg 3: Package filename
 					updaterProcess.Arguments = $"{VersionString} {FixSpaces(CurrentFilename)} {ChecksumAsset.Filename} {PackageAsset.Filename}";
-                    updaterProcess.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                    updaterProcess.UseShellExecute = true;
-                    Process.Start(updaterProcess);
+					updaterProcess.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+					updaterProcess.UseShellExecute = true;
+					Process.Start(updaterProcess);
 
-                    Application.Exit();
-                }
-            }
-            catch (Exception ex)
-            {
-                this.ControlBox = true;
-                this.noButton.Enabled = true;
-                this.yesButton.Enabled = true;
-                this.downloadProgress.Value = 0;
-                statusLabel.Text = "Status: Idle";
+					Application.Exit();
+				}
+			}
+			catch (Exception ex)
+			{
+				this.ControlBox = true;
+				this.noButton.Enabled = true;
+				this.yesButton.Enabled = true;
+				this.downloadProgress.Value = 0;
+				statusLabel.Text = "Status: Idle";
 
-                MessageBox.Show("An error has ocurred while downloading and verifying the update package:\n\n" +
-                               $"{ex.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("An error has ocurred while downloading and verifying the update package:\n\n" +
+							   $"{ex.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 				if (File.Exists(PackageAsset.Filename)) File.Delete(PackageAsset.Filename);
 				if (File.Exists(ChecksumAsset.Filename)) File.Delete(ChecksumAsset.Filename);
-            }
-        }
+			}
+		}
 
-        private string FixSpaces(string Text)
-        {
-            if (Text.Contains(" ")) return $"\"{Text}\"";
-            else return Text;
-        }
-    }
+		private string FixSpaces(string Text)
+		{
+			if (Text.Contains(" ")) return $"\"{Text}\"";
+			else return Text;
+		}
+	}
 }
