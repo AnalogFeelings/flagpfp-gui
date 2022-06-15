@@ -196,6 +196,7 @@ namespace FlagPFPGUI
 				colorsDataGrid.Enabled = true;
 				addColor.Enabled = true;
 				removeColor.Enabled = true;
+				colorsLabel.Visible = true;
 
 				marginBox.Enabled = false;
 			}
@@ -204,6 +205,7 @@ namespace FlagPFPGUI
 				colorsDataGrid.Enabled = false;
 				addColor.Enabled = false;
 				removeColor.Enabled = false;
+				colorsLabel.Visible = false;
 
 				marginBox.Enabled = true;
 			}
@@ -214,8 +216,8 @@ namespace FlagPFPGUI
 			SplitContainer Target = sender as SplitContainer;
 
 			Rectangle Copy = Target.SplitterRectangle;
-			Copy.X += 3;
-			Copy.Width = 2;
+			//Copy.X += 3;
+			//Copy.Width = 2;
 
 			e.Graphics.FillRectangle(SystemBrushes.ControlLight, Copy);
 		}

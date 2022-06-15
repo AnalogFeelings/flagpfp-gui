@@ -87,6 +87,9 @@
     </Compile>
     <Compile Include="Source\FlagPFPCore\PrideFlag.cs" />
     <Compile Include="Source\NativeMethods.cs" />
+    <Compile Include="Source\PictureBoxWithText.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\FlagPFPCore\WebPWrapper.cs" />

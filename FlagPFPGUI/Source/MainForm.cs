@@ -173,6 +173,7 @@ namespace FlagPFPGUI
 			colorsDataGrid.Enabled = false;
 			addColor.Enabled = false;
 			removeColor.Enabled = false;
+			colorsLabel.Visible = false;
 
 			flagsDataGrid.Enabled = false;
 			moveDown.Enabled = false;
@@ -206,6 +207,7 @@ namespace FlagPFPGUI
 				colorsDataGrid.Enabled = true;
 				addColor.Enabled = true;
 				removeColor.Enabled = true;
+				colorsLabel.Visible = true;
 			}
 			else marginBox.Enabled = true;
 
