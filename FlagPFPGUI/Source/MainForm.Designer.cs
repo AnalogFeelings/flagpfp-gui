@@ -122,7 +122,7 @@ namespace FlagPFPGUI
 			this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBox2.Location = new System.Drawing.Point(3, 3);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(857, 460);
+			this.groupBox2.Size = new System.Drawing.Size(853, 460);
 			this.groupBox2.TabIndex = 1;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Image Parameters";
@@ -184,7 +184,7 @@ namespace FlagPFPGUI
             0});
 			this.marginBox.Name = "marginBox";
 			this.marginBox.SetCaretAtEnd = false;
-			this.marginBox.Size = new System.Drawing.Size(714, 23);
+			this.marginBox.Size = new System.Drawing.Size(710, 23);
 			this.marginBox.TabIndex = 4;
 			this.marginBox.UnitText = "px";
 			// 
@@ -201,7 +201,7 @@ namespace FlagPFPGUI
             0});
 			this.fsizeBox.Name = "fsizeBox";
 			this.fsizeBox.SetCaretAtEnd = false;
-			this.fsizeBox.Size = new System.Drawing.Size(714, 23);
+			this.fsizeBox.Size = new System.Drawing.Size(710, 23);
 			this.fsizeBox.TabIndex = 6;
 			this.fsizeBox.UnitText = "px";
 			// 
@@ -218,7 +218,7 @@ namespace FlagPFPGUI
             0});
 			this.insizeBox.Name = "insizeBox";
 			this.insizeBox.SetCaretAtEnd = false;
-			this.insizeBox.Size = new System.Drawing.Size(714, 23);
+			this.insizeBox.Size = new System.Drawing.Size(710, 23);
 			this.insizeBox.TabIndex = 5;
 			this.insizeBox.UnitText = "px";
 			// 
@@ -280,7 +280,7 @@ namespace FlagPFPGUI
 			// 
 			this.addFlag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.addFlag.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.addFlag.Location = new System.Drawing.Point(696, 407);
+			this.addFlag.Location = new System.Drawing.Point(692, 407);
 			this.addFlag.Name = "addFlag";
 			this.addFlag.Size = new System.Drawing.Size(75, 23);
 			this.addFlag.TabIndex = 15;
@@ -292,7 +292,7 @@ namespace FlagPFPGUI
 			// 
 			this.removeFlag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.removeFlag.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.removeFlag.Location = new System.Drawing.Point(777, 407);
+			this.removeFlag.Location = new System.Drawing.Point(773, 407);
 			this.removeFlag.Name = "removeFlag";
 			this.removeFlag.Size = new System.Drawing.Size(75, 23);
 			this.removeFlag.TabIndex = 16;
@@ -334,7 +334,7 @@ namespace FlagPFPGUI
 			this.flagsDataGrid.Location = new System.Drawing.Point(136, 221);
 			this.flagsDataGrid.MultiSelect = false;
 			this.flagsDataGrid.Name = "flagsDataGrid";
-			this.flagsDataGrid.Size = new System.Drawing.Size(714, 180);
+			this.flagsDataGrid.Size = new System.Drawing.Size(710, 180);
 			this.flagsDataGrid.TabIndex = 12;
 			this.flagsDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.flagsDataGrid_CellClick);
 			// 
@@ -352,7 +352,7 @@ namespace FlagPFPGUI
 			// 
 			this.outputBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.outputBrowseButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.outputBrowseButton.Location = new System.Drawing.Point(777, 51);
+			this.outputBrowseButton.Location = new System.Drawing.Point(773, 51);
 			this.outputBrowseButton.Name = "outputBrowseButton";
 			this.outputBrowseButton.Size = new System.Drawing.Size(75, 23);
 			this.outputBrowseButton.TabIndex = 3;
@@ -366,7 +366,7 @@ namespace FlagPFPGUI
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.outputBox.Location = new System.Drawing.Point(136, 51);
 			this.outputBox.Name = "outputBox";
-			this.outputBox.Size = new System.Drawing.Size(635, 23);
+			this.outputBox.Size = new System.Drawing.Size(631, 23);
 			this.outputBox.TabIndex = 2;
 			// 
 			// label8
@@ -414,7 +414,7 @@ namespace FlagPFPGUI
 			// 
 			this.inputBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.inputBrowseButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.inputBrowseButton.Location = new System.Drawing.Point(777, 22);
+			this.inputBrowseButton.Location = new System.Drawing.Point(773, 22);
 			this.inputBrowseButton.Name = "inputBrowseButton";
 			this.inputBrowseButton.Size = new System.Drawing.Size(75, 23);
 			this.inputBrowseButton.TabIndex = 1;
@@ -438,7 +438,7 @@ namespace FlagPFPGUI
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.inputBox.Location = new System.Drawing.Point(136, 22);
 			this.inputBox.Name = "inputBox";
-			this.inputBox.Size = new System.Drawing.Size(635, 23);
+			this.inputBox.Size = new System.Drawing.Size(631, 23);
 			this.inputBox.TabIndex = 0;
 			// 
 			// aboutButton
@@ -472,7 +472,7 @@ namespace FlagPFPGUI
 			this.generateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.generateButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.generateButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.generateButton.Location = new System.Drawing.Point(785, 469);
+			this.generateButton.Location = new System.Drawing.Point(781, 469);
 			this.generateButton.Name = "generateButton";
 			this.generateButton.Size = new System.Drawing.Size(75, 23);
 			this.generateButton.TabIndex = 17;
@@ -539,7 +539,7 @@ namespace FlagPFPGUI
 			// 
 			this.showAfterwardsCheckbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.showAfterwardsCheckbox.AutoSize = true;
-			this.showAfterwardsCheckbox.Location = new System.Drawing.Point(623, 473);
+			this.showAfterwardsCheckbox.Location = new System.Drawing.Point(619, 473);
 			this.showAfterwardsCheckbox.Name = "showAfterwardsCheckbox";
 			this.showAfterwardsCheckbox.Size = new System.Drawing.Size(156, 17);
 			this.showAfterwardsCheckbox.TabIndex = 18;

@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -25,7 +24,7 @@ namespace FlagPFPGUI
 		private const string GIT_LATEST_RELEASE_URL = "https://github.com/AestheticalZ/flagpfp-gui/releases/latest";
 
 		private readonly Random Random = new Random();
-		private readonly string[] CUTE_PHRASES = 
+		private readonly string[] CUTE_PHRASES =
 		{
 			"Trans rights!",
 			"Pan-tasticly cool!",
