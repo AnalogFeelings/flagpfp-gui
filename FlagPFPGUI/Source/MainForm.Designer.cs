@@ -137,11 +137,13 @@ namespace FlagPFPGUI
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.colorsDataGrid.BackgroundColor = System.Drawing.SystemColors.Control;
 			this.colorsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.colorsDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
 			this.colorsDataGrid.Enabled = false;
 			this.colorsDataGrid.Location = new System.Drawing.Point(136, 192);
+			this.colorsDataGrid.MultiSelect = false;
 			this.colorsDataGrid.Name = "colorsDataGrid";
 			this.colorsDataGrid.Size = new System.Drawing.Size(685, 131);
-			this.colorsDataGrid.TabIndex = 24;
+			this.colorsDataGrid.TabIndex = 11;
 			// 
 			// colorsLabel
 			// 
@@ -205,7 +207,7 @@ namespace FlagPFPGUI
 			this.moveUp.Location = new System.Drawing.Point(136, 529);
 			this.moveUp.Name = "moveUp";
 			this.moveUp.Size = new System.Drawing.Size(83, 23);
-			this.moveUp.TabIndex = 13;
+			this.moveUp.TabIndex = 15;
 			this.moveUp.Text = "Move Up";
 			this.moveUp.UseVisualStyleBackColor = true;
 			this.moveUp.Click += new System.EventHandler(this.moveUp_Click);
@@ -217,7 +219,7 @@ namespace FlagPFPGUI
 			this.moveDown.Location = new System.Drawing.Point(222, 529);
 			this.moveDown.Name = "moveDown";
 			this.moveDown.Size = new System.Drawing.Size(83, 23);
-			this.moveDown.TabIndex = 14;
+			this.moveDown.TabIndex = 16;
 			this.moveDown.Text = "Move Down";
 			this.moveDown.UseVisualStyleBackColor = true;
 			this.moveDown.Click += new System.EventHandler(this.moveDown_Click);
@@ -230,7 +232,7 @@ namespace FlagPFPGUI
 			this.addColor.Location = new System.Drawing.Point(665, 329);
 			this.addColor.Name = "addColor";
 			this.addColor.Size = new System.Drawing.Size(75, 23);
-			this.addColor.TabIndex = 15;
+			this.addColor.TabIndex = 12;
 			this.addColor.Text = "Add";
 			this.addColor.UseVisualStyleBackColor = true;
 			this.addColor.Click += new System.EventHandler(this.addFlag_Click);
@@ -242,7 +244,7 @@ namespace FlagPFPGUI
 			this.addFlag.Location = new System.Drawing.Point(665, 529);
 			this.addFlag.Name = "addFlag";
 			this.addFlag.Size = new System.Drawing.Size(75, 23);
-			this.addFlag.TabIndex = 15;
+			this.addFlag.TabIndex = 17;
 			this.addFlag.Text = "Add";
 			this.addFlag.UseVisualStyleBackColor = true;
 			this.addFlag.Click += new System.EventHandler(this.addFlag_Click);
@@ -255,7 +257,7 @@ namespace FlagPFPGUI
 			this.removeColor.Location = new System.Drawing.Point(746, 329);
 			this.removeColor.Name = "removeColor";
 			this.removeColor.Size = new System.Drawing.Size(75, 23);
-			this.removeColor.TabIndex = 16;
+			this.removeColor.TabIndex = 13;
 			this.removeColor.Text = "Remove";
 			this.removeColor.UseVisualStyleBackColor = true;
 			this.removeColor.Click += new System.EventHandler(this.removeFlag_Click);
@@ -267,7 +269,7 @@ namespace FlagPFPGUI
 			this.removeFlag.Location = new System.Drawing.Point(746, 529);
 			this.removeFlag.Name = "removeFlag";
 			this.removeFlag.Size = new System.Drawing.Size(75, 23);
-			this.removeFlag.TabIndex = 16;
+			this.removeFlag.TabIndex = 18;
 			this.removeFlag.Text = "Remove";
 			this.removeFlag.UseVisualStyleBackColor = true;
 			this.removeFlag.Click += new System.EventHandler(this.removeFlag_Click);
@@ -307,7 +309,7 @@ namespace FlagPFPGUI
 			this.flagsDataGrid.MultiSelect = false;
 			this.flagsDataGrid.Name = "flagsDataGrid";
 			this.flagsDataGrid.Size = new System.Drawing.Size(685, 165);
-			this.flagsDataGrid.TabIndex = 12;
+			this.flagsDataGrid.TabIndex = 14;
 			this.flagsDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.flagsDataGrid_CellClick);
 			// 
 			// label6
@@ -421,7 +423,7 @@ namespace FlagPFPGUI
 			this.aboutButton.Location = new System.Drawing.Point(84, 591);
 			this.aboutButton.Name = "aboutButton";
 			this.aboutButton.Size = new System.Drawing.Size(75, 23);
-			this.aboutButton.TabIndex = 20;
+			this.aboutButton.TabIndex = 22;
 			this.aboutButton.Text = "About";
 			this.aboutButton.UseVisualStyleBackColor = true;
 			this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
@@ -434,7 +436,7 @@ namespace FlagPFPGUI
 			this.quitButton.Location = new System.Drawing.Point(3, 591);
 			this.quitButton.Name = "quitButton";
 			this.quitButton.Size = new System.Drawing.Size(75, 23);
-			this.quitButton.TabIndex = 21;
+			this.quitButton.TabIndex = 23;
 			this.quitButton.Text = "Quit";
 			this.quitButton.UseVisualStyleBackColor = true;
 			this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
@@ -447,7 +449,7 @@ namespace FlagPFPGUI
 			this.generateButton.Location = new System.Drawing.Point(755, 591);
 			this.generateButton.Name = "generateButton";
 			this.generateButton.Size = new System.Drawing.Size(75, 23);
-			this.generateButton.TabIndex = 17;
+			this.generateButton.TabIndex = 19;
 			this.generateButton.Text = "Generate";
 			this.generateButton.UseVisualStyleBackColor = true;
 			this.generateButton.Click += new System.EventHandler(this.generateButton_Click);
@@ -501,7 +503,7 @@ namespace FlagPFPGUI
 			this.showAfterwardsCheckbox.Location = new System.Drawing.Point(593, 595);
 			this.showAfterwardsCheckbox.Name = "showAfterwardsCheckbox";
 			this.showAfterwardsCheckbox.Size = new System.Drawing.Size(156, 17);
-			this.showAfterwardsCheckbox.TabIndex = 18;
+			this.showAfterwardsCheckbox.TabIndex = 20;
 			this.showAfterwardsCheckbox.Text = "Show in explorer afterwards";
 			this.showAfterwardsCheckbox.UseVisualStyleBackColor = true;
 			// 
@@ -513,7 +515,7 @@ namespace FlagPFPGUI
 			this.CreateFlagButton.Location = new System.Drawing.Point(165, 591);
 			this.CreateFlagButton.Name = "CreateFlagButton";
 			this.CreateFlagButton.Size = new System.Drawing.Size(75, 23);
-			this.CreateFlagButton.TabIndex = 19;
+			this.CreateFlagButton.TabIndex = 21;
 			this.CreateFlagButton.Text = "Create Flag";
 			this.CreateFlagButton.UseVisualStyleBackColor = true;
 			this.CreateFlagButton.Click += new System.EventHandler(this.CreateFlagButton_Click);
