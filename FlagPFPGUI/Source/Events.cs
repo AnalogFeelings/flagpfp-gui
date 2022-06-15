@@ -193,13 +193,19 @@ namespace FlagPFPGUI
 		{
 			if (backgroundModeCheckbox.Checked)
 			{
+				colorsDataGrid.Enabled = true;
+				addColor.Enabled = true;
+				removeColor.Enabled = true;
+
 				marginBox.Enabled = false;
-				pickColorButton.Enabled = true;
 			}
 			else
 			{
+				colorsDataGrid.Enabled = false;
+				addColor.Enabled = false;
+				removeColor.Enabled = false;
+
 				marginBox.Enabled = true;
-				pickColorButton.Enabled = false;
 			}
 		}
 

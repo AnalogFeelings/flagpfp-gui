@@ -170,7 +170,9 @@ namespace FlagPFPGUI
 			flipVeriCheckbox.Enabled = false;
 
 			backgroundModeCheckbox.AutoCheck = false;
-			pickColorButton.Enabled = false;
+			colorsDataGrid.Enabled = false;
+			addColor.Enabled = false;
+			removeColor.Enabled = false;
 
 			flagsDataGrid.Enabled = false;
 			moveDown.Enabled = false;
@@ -201,7 +203,9 @@ namespace FlagPFPGUI
 
 			if (backgroundModeCheckbox.Checked)
 			{
-				pickColorButton.Enabled = true;
+				colorsDataGrid.Enabled = true;
+				addColor.Enabled = true;
+				removeColor.Enabled = true;
 			}
 			else marginBox.Enabled = true;
 
